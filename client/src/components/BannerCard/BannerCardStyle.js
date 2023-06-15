@@ -2,7 +2,11 @@ const cardStyle = {
     top : `relative` ,
     left : `relative` ,
     right : `relative` ,
-    img : `w-[100%] h-[400px] rounded-[16px] ` , 
+    img : `
+           w-[100%]
+           h-[400px] 
+           rounded-[16px] 
+          ` , 
    text : `absolute top-[40%] px-8 text-[#97451F] transform -translate-y-[50px]` ,
    h4 : `font-thin text-[26px]` , 
    h1 : `font-bold text-[52px] w-[70%]` , 
