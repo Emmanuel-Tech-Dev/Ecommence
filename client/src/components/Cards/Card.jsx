@@ -1,4 +1,4 @@
-import React from 'react'
+import {Link} from 'react-router-dom'
 
 import {AiOutlineHeart} from 'react-icons/ai'
 //importing Card style
@@ -11,8 +11,8 @@ const Card = ({item}) => {
 
 
   return (
-   
-       <div className={cardStyle.card}>
+   <Link to={'/product/1'}>
+     <div className={cardStyle.card}>
         <img src={item.img} className={cardStyle.img}/>
         <div className={cardStyle.desc}>
             <div className={cardStyle.title}>
@@ -32,6 +32,8 @@ const Card = ({item}) => {
            </div>
         </div>
        </div>
+   </Link>
+      
    
   )
 }

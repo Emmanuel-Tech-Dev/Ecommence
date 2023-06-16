@@ -20,9 +20,12 @@ const Navbar = () => {
     <>
       <div className={navStyle.nav}>
         <div className={navStyle.left}>
+          <Link to={'/'}>
           <label className={navStyle.logo}>
             <img src='../images/logo.png' />
           </label>
+          </Link>
+          
           <div className={navStyle.navlinks}>
             {/* Mapping over link items */}
             {links.map((item) => (
