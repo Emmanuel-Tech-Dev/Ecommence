@@ -18,6 +18,12 @@ const catStyle = {
          justify-between
          items-center  
          mb-8
+         sticky 
+         top-0
+         h-[2%]
+         bg-[#fff]
+         py-10
+
     ` , 
 
     leftSm : `
