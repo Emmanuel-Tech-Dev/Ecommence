@@ -140,7 +140,7 @@ const handleSetActiveButton = (button) => {
 
            <div className="quantity my-10 flex items-center gap-x-4">
             <h1 className='text-[20px] font-semibold '>Quantity:</h1>
-            <div className="counter border border-[#1B4B66] rounded-md flex items-center gap-x-5">
+            <div className="counter border border-[#1B4B66] rounded-md w-[120px] flex items-center justify-between">
             <button className='px-2 text-[24px]' onClick={() => setQuantity(prev => prev === 1 ? 1 : prev - 1)}>-</button>
             <span>{quantity}</span>
             <button className='px-2 text-[24px]' onClick={() => setQuantity(prev => prev + 1)}>+</button>

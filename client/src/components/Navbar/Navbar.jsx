@@ -2,8 +2,25 @@
 import { AiOutlineHeart, AiOutlineShopping, AiOutlineUser, AiOutlineSearch } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import navStyle from './NavbarStyle'
+import Cart from '../Cart/Cart'
+import Wishlist from '../Wishlist/Wishlist'
+import { useState } from 'react'
 
 const Navbar = () => {
+
+  const [open , setOpen] = useState(false)
+  const handleCartOpen = () => {
+    setOpen(!open)
+  }
+  
+  const [openWishList , setOpenWishlist] = useState(false)
+  const handleWishOpen = () => {
+    setOpenWishlist(!openWishList)
+  }
+
+
+ 
+
 
   const links = [
 
@@ -42,18 +59,18 @@ const Navbar = () => {
             <input className={navStyle.input} type='text' placeholder='Search for products or brands...' />
           </div>
           <div className={navStyle.icons}>
-            <AiOutlineHeart size={24} color='#13101E' />
+            <AiOutlineHeart size={24} color='#13101E' onClick={handleWishOpen} />
             <AiOutlineUser size={24} color='#13101E' />
-            <div className={navStyle.cart}>
-              <AiOutlineShopping size={24} color='#13101E' className={navStyle.cartIcon} />
+            <div className={navStyle.cart} >
+              <AiOutlineShopping size={24} color='#13101E' className={navStyle.cartIcon} onClick={handleCartOpen}/>
               <span className={navStyle.count}>0</span>
             </div>
           </div>
         </div>
       </div>
-      <div className={navStyle.bottom}>
-        <h1>We are currently experiencing local customs clearance delays. For the latest updates, please check your order status <Link to='/' className='text-blue-700 underline'>here</Link> </h1>
-      </div>
+     
+     {open && <Cart/>}
+     {openWishList && <Wishlist/>} 
     </>
 
   )

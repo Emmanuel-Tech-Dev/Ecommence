@@ -22,7 +22,7 @@ const NavStyle =
 
   count: `absolute bg-[#FF8C4B] text-[5px] px-1 rounded-[50px] top-[0] right-[0]`,
 
-  bottom: `w-full py-3 bg-[#f1f1f1] text-center`
+ 
 
 
 
