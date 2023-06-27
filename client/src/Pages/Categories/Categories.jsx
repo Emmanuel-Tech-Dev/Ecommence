@@ -6,78 +6,26 @@ import { CgMenuGridR } from 'react-icons/cg'
 import { IoIosArrowForward } from 'react-icons/io'
 import catStyle from './CategoriesStyle'
 import Pagination from '../../components/Pagination/Pagination'
+import List from '../../components/List/LIst'
+import { Link, useParams } from 'react-router-dom';
+import useFetch from '../../hooks/usefetch'
 
 const Categories = () => {
 
+  const cateId = parseInt(useParams().id);
 
-  const data = [
+  console.log(cateId)
 
-    {
-      id: 1,
-      img: "../../images/pink-bag.png",
-      brand: "Grande",
-      title: 'Blossom Pouch',
-      ratings: 43,
-      price: 57.00,
-      oldPrice: 78.66,
-      discount: '50'
+  const { data, loading, error } = useFetch(
+    `/categories/${cateId}?populate=products`
+  ); 
+  
+  const { newData } = useFetch(
+    `products?populate=*&_limit=4`
+  );
 
-    },
-    {
-
-      id: 2,
-      img: "../../images/duffle.png",
-      brand: "Coach",
-      title: 'Leather Coach Bag',
-      ratings: 43,
-      price: 57.00,
-      oldPrice: 78.66,
-      discount: '30'
-
-    },
-    {
-      id: 3,
-      img: "../../images/brownBag.png",
-      brand: "Remus",
-      title: 'Brown Strap Bag',
-      ratings: 43,
-      price: 57.00,
-      oldPrice: 78.66,
-      discount: '20'
-    },
-    {
-      id: 4,
-      img: "../../images/black-bag.png",
-      brand: "Boujee",
-      title: 'Black Bag',
-      ratings: 43,
-      price: 57.00,
-      oldPrice: 78.66,
-      discount: '40'
-    },
-    {
-      id: 5,
-      img: "../../images/black-bag.png",
-      brand: "Boujee",
-      title: 'Black Bag',
-      ratings: 43,
-      price: 57.00,
-      oldPrice: 78.66,
-      discount: '40'
-    }, {
-      id: 6,
-      img: "../../images/black-bag.png",
-      brand: "Boujee",
-      title: 'Black Bag',
-      ratings: 43,
-      price: 57.00,
-      oldPrice: 78.66,
-      discount: '40'
-    },
-
-
-  ]
-
+  console.log(data);
+  
 
   return (
     <div className={catStyle.container}>
@@ -92,13 +40,16 @@ const Categories = () => {
       </div>
       <div className="heading mt-16 -mb-10">
         <div className="cramps flex items-center gap-x-2 text-[14px] font-meduim ">
-          <h1 className='opacity-[.4]'>Home</h1>
+         <Link to={'/'}>
+           <h1 className='opacity-[.4]'>Home</h1>
+         </Link>
+        
           <IoIosArrowForward />
-          <h1 className='opacity-[1] text-[#1B4B66]'>HandBags</h1>
+          <h1 className='opacity-[1] text-[#1B4B66]'>{data?.attributes?.title}</h1>
         </div>
 
         <div className="title text-[32px] font-bold text-[#1B4B66] mt-5 ">
-          <h1 >HandBags</h1>
+          <h1 >{data?.attributes?.title}</h1>
         </div>
       </div>
       <div className={catStyle.bottom}>
@@ -117,32 +68,30 @@ const Categories = () => {
               <div className="icon bg-[#1B4B66]">
                 <CgMenuGridR size={24} color='#fefe' />
               </div>
-              <span>Showing 1 - {data.length} of {data.length}</span>
+              <span>Showing 1 - {newData.length} of {newData.length}</span>
             </div>
 
             <div className={catStyle.rightSm}>
               <div className="count flex items-center gap-x-3">
                 <h1>To show:</h1>
-                <span className='bg-[#F1F1F1] px-4 py-2 rounded'>{data.length}</span>
+                <span className='bg-[#F1F1F1] px-4 py-2 rounded'>{newData.length}</span>
               </div>
               <div className="sort flex items-center gap-x-3">
                 <label htmlFor='sort'>Sort By:</label>
                 <select name="" id="sort" className={catStyle.select}>
-                  <option value="Size">Size</option>
-                  <option value="Position">Position</option>
-                  <option value="Price">Price</option>
+                  <option value="handbags">Handbags</option>
+                  <option value="personalCare">Personal Care</option>
+                  <option value="watches">Watches</option> 
+                  <option value="glasses">Glasses</option>
+                  
                 </select>
               </div>
             </div>
           </div>
-          <div className="flex justify-between gap-y-20 flex-wrap ">
-            {data.map((item) => (
-              <div key={item.id}>
-                <Card item={item} />
-              </div>
-            ))}
-
-
+          <div className="">
+           
+                <List cateId={cateId} />
+            
           </div>
           <div className="pagination mt-20">
             <Pagination />

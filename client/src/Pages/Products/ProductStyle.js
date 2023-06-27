@@ -7,6 +7,7 @@ const productStyle = {
    content : `
         flex
         gap-x-10
+        mt-10
    ` , 
 
    left : `

@@ -1,0 +1,72 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sub_categories",
+  "info": {
+    "singularName": "sub-category",
+    "pluralName": "sub-categories",
+    "displayName": "subCategory"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "size": {
+      "type": "enumeration",
+      "enum": [
+        "small",
+        "medium",
+        "Large"
+      ]
+    },
+    "color": {
+      "type": "enumeration",
+      "enum": [
+        "pink",
+        "red",
+        "black",
+        "blue"
+      ]
+    },
+    "brand": {
+      "type": "enumeration",
+      "enum": [
+        "zara",
+        "D&G",
+        "H&M",
+        "chanel",
+        "prada",
+        "biba"
+      ]
+    },
+    "priceRange": {
+      "type": "enumeration",
+      "enum": [
+        "c60",
+        "c100",
+        "c200",
+        "c350"
+      ]
+    },
+    "dicount": {
+      "type": "enumeration",
+      "enum": [
+        "c10",
+        "c20",
+        "c30",
+        "c40",
+        "c50",
+        "c65"
+      ]
+    },
+    "availability": {
+      "type": "boolean"
+    },
+    "products": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product",
+      "inversedBy": "sub_categories"
+    }
+  }
+}

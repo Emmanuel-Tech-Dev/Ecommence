@@ -1,7 +1,7 @@
 import React , {useState , useEffect} from 'react'
 import { Link } from 'react-router-dom';
 
-import { AiOutlineShopping } from 'react-icons/ai'
+import { AiOutlineShopping, AiOutlineClose } from 'react-icons/ai';
 
 const Wishlist = () => {
 
@@ -59,7 +59,7 @@ const Wishlist = () => {
           </div>
         </div>
         <div className="right flex flex-col justify-between items-end">
-          <button>x</button>
+          <button><AiOutlineClose/></button>
           <span className="font-medium text-[#1B4B66]">${price}</span>
         </div>
       </div>
@@ -67,7 +67,6 @@ const Wishlist = () => {
       <hr />
 
       <div className="bottom my-10">
-        
         <div className="coupon bg-[#F1F1F1] flex justify-between py-3 px-4 flex-[2] rounded-md">
           <input
             type="text"

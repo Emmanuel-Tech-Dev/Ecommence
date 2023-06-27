@@ -1,44 +1,17 @@
-import React from 'react'
+
 import Card from '../Cards/Card_T'
 
 import collStyle from './CollectionStyle'
+import useFetch from '../../hooks/usefetch'
 
-const data = [
-
-  {
-
-    id: 1,
-    img: "../images/spray.png",
-    title: 'Personal Care',
-
-  },
-  {
-
-    id: 2,
-    img: "../images/creative.png",
-    title: 'Handbags',
-
-  },
-  {
-
-    id: 3,
-    img: "../images/watch.png",
-    title: 'Wrist Watches',
-
-  },
-  {
-
-    id: 4,
-    img: "../images/shades.png",
-    title: 'Sun Glasses',
-
-  },
-
-
-]
 
 
 const Collection = () => {
+
+  const {data , loading , error } = useFetch(`/categories?populate=*`)
+
+console.log(data)
+
 
   return (
     <div className={collStyle.container}>

@@ -5,57 +5,30 @@ import Card from '../Cards/Card'
 
 //importing styles
 import newStyle from './NewStyle'
+import useFetch from '../../hooks/usefetch'
 
-const data = [
-    
- {
-    id: 1,
-    img: "../images/pink-bag.png",
-    brand: "Grande",
-    title: 'Blossom Pouch',
-    ratings : 43,
-    price : 57.00,
-    oldPrice : 78.66,
-    discount : '50'
 
- } , 
- {
 
-    id: 2,
-    img: "../images/duffle.png",
-    brand: "Coach",
-    title: 'Leather Coach Bag',
-    ratings : 43,
-    price : 57.00,
-     oldPrice : 78.66,
-     discount : '30'
-
- } , 
- {
-    id: 3,
-    img: "../images/brownBag.png",
-    brand: "Remus",
-    title: 'Brown Strap Bag',
-    ratings : 43,
-    price : 57.00,
-     oldPrice : 78.66,
-     discount : '20'
- } , 
- {
-    id: 4,
-    img: "../images/black-bag.png",
-    brand: "Boujee",
-    title: 'Black Bag',
-    ratings : 43,
-    price : 57.00,
-     oldPrice : 78.66,
-     discount : '40'
- } , 
-  
-
-]
 
 const New = () => {
+
+  
+const { data, loading, error } = useFetch(
+  `/products?_limit=4&populate=*`
+);
+
+const filterProducts = data
+.slice()
+.reverse()
+.slice(0 , 4).
+sort((a , b) =>
+  new Date(b.attributes.updatedAt) - new Date(a.attributes.updatedAt)
+ )
+
+
+
+
+
   return (
     <div className='py-12'>
     <div className={newStyle.heading}>
@@ -71,7 +44,7 @@ const New = () => {
     </div>
 
 <div className="card-section flex justify-between px-8 py-6">
-{data.map((item) => (
+{filterProducts.map((item) => (
   
   <div key={item.id}>
      <Card item={item}/>

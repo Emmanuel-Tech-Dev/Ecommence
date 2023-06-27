@@ -1,6 +1,6 @@
 import React, { useState , useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
+import { AiOutlineClose } from 'react-icons/ai'
 const Cart = () => {
 
   return (
@@ -22,7 +22,9 @@ const Cart = () => {
           </div>
         </div>
         <div className="right flex flex-col justify-between items-end">
-          <button>x</button>
+          <button>
+            <AiOutlineClose />
+          </button>
           <span className="text-[#1B4B66] font-semibold">$500</span>
         </div>
       </div>

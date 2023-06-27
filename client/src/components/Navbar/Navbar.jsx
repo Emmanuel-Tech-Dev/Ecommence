@@ -45,9 +45,12 @@ const Navbar = () => {
           
           <div className={navStyle.navlinks}>
             {/* Mapping over link items */}
-            {links.map((item) => (
+            {links.map((item , index) => (
               <div key={item.name}>
+                <Link to={`/categories/${index}`}> 
                 <li className={navStyle.li} >{item.name}</li>
+                </Link>
+               
               </div>
             ))}
 
