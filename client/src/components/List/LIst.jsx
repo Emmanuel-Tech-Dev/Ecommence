@@ -1,7 +1,6 @@
-import React from 'react'
-import Card from '../Cards/Card'
-import useFetch from '../../hooks/usefetch'
 
+import Card from '../Cards/Card';
+import useFetch from '../../hooks/usefetch';
 
 // eslint-disable-next-line react/prop-types
 const List = ({ cateId }) => {
@@ -11,14 +10,17 @@ const List = ({ cateId }) => {
 
   return (
     <div className="flex flex-wrap justify-between gap-y-20">
-      {data?.map((item) => (
-        <div key={item.id}>
-          <Card item={item} />
-        </div>
-      ))}
+      {error
+        ? 'Something went wrong '
+        : loading
+        ? 'Loading Data...'
+        : data?.map((item) => (
+            <div key={item.id}>
+              <Card item={item} />
+            </div>
+          ))}
     </div>
   );
 };
 
-export default List
-
+export default List;

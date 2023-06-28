@@ -35,12 +35,6 @@
         "audios"
       ]
     },
-    "category": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::category.category",
-      "inversedBy": "products"
-    },
     "discount": {
       "type": "decimal"
     },
@@ -48,6 +42,12 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::sub-category.sub-category",
+      "mappedBy": "products"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
       "mappedBy": "products"
     }
   }

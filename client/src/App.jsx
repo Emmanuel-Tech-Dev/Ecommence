@@ -1,10 +1,10 @@
-
 import {
   createBrowserRouter,
   RouterProvider,
   Outlet,
- 
+  useLocation,
 } from 'react-router-dom';
+import { useEffect } from 'react';
 
 //importing components
 import Home from './Pages/Home/Home';
@@ -27,11 +27,27 @@ function App() {
     );
   };
 
+  // Scroll to top on route change
+  const ScrollToTop = () => {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [pathname]);
+
+    return null;
+  };
+
   // creating a routing
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Layout />,
+      element: (
+        <>
+          <ScrollToTop />
+          <Layout />
+        </>
+      ),
       children: [
         {
           path: '/',

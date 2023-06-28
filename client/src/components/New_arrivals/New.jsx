@@ -30,30 +30,30 @@ sort((a , b) =>
 
 
   return (
-    <div className='py-12'>
-    <div className={newStyle.heading}>
+    <div className="py-12">
+      <div className={newStyle.heading}>
         <h1 className={newStyle.title}>New Arrivals</h1>
-      <Link to={'/categories/1'}>
-        <button className={newStyle.button}>
-           View All
-<IoIosArrowForward size={24}/>
-        </button>
-      </Link>
-      
-       
-    </div>
+        <Link to={'/categories/1'}>
+          <button className={newStyle.button}>
+            View All
+            <IoIosArrowForward size={24} />
+          </button>
+        </Link>
+      </div>
 
-<div className="card-section flex justify-between px-8 py-6">
-{filterProducts.map((item) => (
-  
-  <div key={item.id}>
-     <Card item={item}/>
-   </div>
-
-))}
-    </div> 
+      <div className="card-section flex justify-between px-8 py-6">
+        {error
+          ? 'Something went wrong '
+          : loading
+          ? 'Loading Data...'
+          : filterProducts.map((item) => (
+              <div key={item.id}>
+                <Card item={item} />
+              </div>
+            ))}
+      </div>
     </div>
-  )
+  );
 }
 
 export default New

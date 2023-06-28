@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {Link} from 'react-router-dom'
 
 import cardStyle from './CardStyle'
@@ -16,7 +17,9 @@ const Card_T = ({item}) => {
           className={cardStyle.img}
         />
         <div className={cardStyle.bg}>
-          <h1 className={cardStyle.h1}>{item?.attributes?.title}</h1>
+          <h1 className={cardStyle.h1}>
+            {item?.attributes?.title.replace(/_/g, ' ')}
+          </h1>
         </div>
       </div>
     </Link>

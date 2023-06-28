@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {Link} from 'react-router-dom'
 
 import {AiOutlineHeart} from 'react-icons/ai'
@@ -9,6 +10,7 @@ import cardStyle from './CardStyle'
 
 const Card = ({item}) => {
 
+    // eslint-disable-next-line react/prop-types
     const oldPrice = item?.attributes?.price;
     const discount = item?.attributes?.discount;
 

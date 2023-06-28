@@ -9,22 +9,25 @@ import Pagination from '../../components/Pagination/Pagination'
 import List from '../../components/List/LIst'
 import { Link, useParams } from 'react-router-dom';
 import useFetch from '../../hooks/usefetch'
+import { useState } from 'react'
 
 const Categories = () => {
 
   const cateId = parseInt(useParams().id);
 
-  console.log(cateId)
+  const [sort , setSort] =useState('handbags')
+
+  console.log(sort)
 
   const { data, loading, error } = useFetch(
-    `/categories/${cateId}?populate=products`
+    `/categories/${cateId}?populate=products&_sort=${sort}`
   ); 
   
   const { newData } = useFetch(
     `products?populate=*&_limit=4`
   );
 
-  console.log(data);
+
   
 
   return (
@@ -40,67 +43,74 @@ const Categories = () => {
       </div>
       <div className="heading mt-16 -mb-10">
         <div className="cramps flex items-center gap-x-2 text-[14px] font-meduim ">
-         <Link to={'/'}>
-           <h1 className='opacity-[.4]'>Home</h1>
-         </Link>
-        
+          <Link to={'/'}>
+            <h1 className="opacity-[.4]">Home</h1>
+          </Link>
+
           <IoIosArrowForward />
-          <h1 className='opacity-[1] text-[#1B4B66]'>{data?.attributes?.title}</h1>
+          <h1 className="opacity-[1] text-[#1B4B66]">
+            {data?.attributes?.title}
+          </h1>
         </div>
 
         <div className="title text-[32px] font-bold text-[#1B4B66] mt-5 ">
-          <h1 >{data?.attributes?.title}</h1>
+          <h1>{data?.attributes?.title}</h1>
         </div>
       </div>
       <div className={catStyle.bottom}>
-
         <div className={catStyle.left}>
-          <Accordion title='Size' id='1' />
-          <Accordion title='Color' id='2' />
-          <Accordion title='Brand' id='3' />
-          <Accordion title='Price Range' id='4' />
-          <Accordion title='Discount' id='5' />
-          <Accordion title='Availability' id='6' />
+          <Accordion title="Size" id="1" />
+          <Accordion title="Color" id="2" />
+          <Accordion title="Brand" id="3" />
+          <Accordion title="Price Range" id="4" />
+          <Accordion title="Discount" id="5" />
+          <Accordion title="Availability" id="6" />
         </div>
         <div className={catStyle.right}>
           <div className={catStyle.tabs}>
             <div className={catStyle.leftSm}>
               <div className="icon bg-[#1B4B66]">
-                <CgMenuGridR size={24} color='#fefe' />
+                <CgMenuGridR size={24} color="#fefe" />
               </div>
-              <span>Showing 1 - {newData.length} of {newData.length}</span>
+              <span>
+                Showing 1 - {data?.attributes?.products?.data?.length} of{' '}
+                {data?.attributes?.products?.data?.length}
+              </span>
             </div>
 
             <div className={catStyle.rightSm}>
               <div className="count flex items-center gap-x-3">
                 <h1>To show:</h1>
-                <span className='bg-[#F1F1F1] px-4 py-2 rounded'>{newData.length}</span>
+                <span className="bg-[#F1F1F1] px-4 py-2 rounded">
+                  {data?.attributes?.products?.data?.length}
+                </span>
               </div>
               <div className="sort flex items-center gap-x-3">
-                <label htmlFor='sort'>Sort By:</label>
-                <select name="" id="sort" className={catStyle.select}>
-                  <option value="handbags">Handbags</option>
+                <label htmlFor="sort">Sort By:</label>
+                <select
+                  name=""
+                  id="sort"
+                  className={catStyle.select}
+                  onChange={(e) => setSort(e.target.value)}
+                >
+                  <option value="handbags">Coach</option>
                   <option value="personalCare">Personal Care</option>
-                  <option value="watches">Watches</option> 
+                  <option value="watches">Watches</option>
                   <option value="glasses">Glasses</option>
-                  
                 </select>
               </div>
             </div>
           </div>
           <div className="">
-           
-                <List cateId={cateId} />
-            
+            <List cateId={cateId} />
           </div>
           <div className="pagination mt-20">
             <Pagination />
           </div>
         </div>
       </div>
-
     </div>
-  )
+  );
 }
 
 export default Categories

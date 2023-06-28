@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import productStyle from './ProductStyle';
 import { IoIosArrowForward } from 'react-icons/io';
@@ -19,7 +19,7 @@ const Product = () => {
     setActiveButton(button);
   };
 
-  const {data , loading , error} = useFetch(
+  const {data } = useFetch(
     `products/${id}?populate=*`
   )
 
@@ -53,13 +53,12 @@ const filterProducts = newData
           </Link>
 
           <IoIosArrowForward />
-          <Link to={'/categories/1'}>
-            <h1 className="opacity-[.4] text-[#1B4B66]">HandBags</h1>
+          <Link to={`/categories/${id}`}>
+            <h1 className="opacity-[.4] text-[#1B4B66]">{data?.attributes?.categories?.data[0]?.attributes?.title}</h1>
           </Link>
 
           <IoIosArrowForward />
           <h1 className="opacity-[1] text-[#1B4B66]">
-            {' '}
             {data?.attributes?.name}
           </h1>
         </div>
