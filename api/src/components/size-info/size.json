@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_size_info_sizes",
+  "info": {
+    "displayName": "size",
+    "icon": "collapse",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "sizes": {
+      "type": "enumeration",
+      "enum": [
+        "S",
+        "MD",
+        "L",
+        "XL",
+        "XXL"
+      ]
+    }
+  }
+}

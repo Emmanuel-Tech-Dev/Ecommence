@@ -1,26 +1,21 @@
 import React , {useState , useEffect} from 'react'
-import { Link } from 'react-router-dom';
 
+import { Link } from 'react-router-dom';
 import { AiOutlineShopping, AiOutlineClose } from 'react-icons/ai';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeItem } from '../../redux/wishlistReducer';
+import { addToCart } from '../../redux/cartReducer';
 
 const Wishlist = () => {
 
+  const dispatch = useDispatch()
+
+  const products =useSelector((state) => state.wishlist.products);
+
+  console.log(products)
+  
    const [quantity, setQuantity] = useState(1);
-   const [price, setPrice] = useState(500); // Initial price, replace with your actual price
-   const [previousPrice, setPreviousPrice] = useState(price); // Store the previous price
-
-   const handleAdd = () => {
-     const totalPrice = previousPrice * quantity; // Multiply the previous price by the quantity
-     setPrice(totalPrice);
-   };
-
-   const handleSubtract = () => {
-     setPrice(previousPrice); // Revert the price to its previous value
-   };
-
-   useEffect(() => {
-     setPreviousPrice(price); // Update the previous price whenever the price changes
-   }, [price]);
+  
 
   return (
     <div className=" absolute z-[999] right-[8%] bg-[#fff] px-5 py-3 shadow rounded w-[25%] ">
@@ -28,41 +23,46 @@ const Wishlist = () => {
         <button>Back</button>
         <h1 className=" text-[20px]">My Wishlist</h1>
       </div>
-
-      <div className="my-10 flex justify-between">
-        <div className="left flex gap-x-5">
-          <img className="w-[100px]" src="../images/pink-bag.png" />
-          <div className="">
-            <h1 className="font-semibold text-[#1B4B66] mb-2">Coach</h1>
-            <span className="text-[#626262]">Leather Coach Bag</span>
-            <div className="counter border mt-2 border-[#1B4B66] w-[100px] justify-between rounded-md flex items-center">
-              <button
-                className="px-2 text-[24px]"
-                onClick={() => {
-                  setQuantity((prev) => (prev === 1 ? 1 : prev - 1));
-                  handleSubtract;
-                }}
-              >
-                -
-              </button>
-              <span>{quantity}</span>
-              <button
-                className="px-2 text-[24px]"
-                onClick={() => {
-                  setQuantity((prev) => prev + 1);
-                  handleAdd();
-                }}
-              >
-                +
-              </button>
+      {products.map((item) => (
+        <div key={item.id} className="my-10 flex justify-between">
+          <div className="left flex gap-x-5">
+            <img
+              className="w-[100px]"
+              src={'http://localhost:1338' + item.image}
+            />{' '}
+            <div className="">
+              <h1 className="font-semibold text-[#1B4B66] mb-2">{item.name}</h1>
+              <span className="text-[#626262]">{item.subDescription}</span>
+              <div className="counter border mt-2 border-[#1B4B66] w-[100px] justify-between rounded-md flex items-center">
+                <button
+                  className="px-2 text-[24px]"
+                  onClick={() => {
+                    setQuantity((prev) => (prev === 1 ? 1 : prev - 1));
+                  }}
+                >
+                  -
+                </button>
+                <span>{quantity}</span>
+                <button
+                  className="px-2 text-[24px]"
+                  onClick={() => {
+                    setQuantity((prev) => prev + 1);
+                  }}
+                >
+                  +
+                </button>
+              </div>
             </div>
           </div>
+          <div className="right flex flex-col justify-between items-end">
+            <button>
+              <AiOutlineClose onClick={() => dispatch(removeItem(item.id))} />
+            </button>
+            <span className="font-medium text-[#1B4B66]">${item.price}</span>
+          </div>
+          
         </div>
-        <div className="right flex flex-col justify-between items-end">
-          <button><AiOutlineClose/></button>
-          <span className="font-medium text-[#1B4B66]">${price}</span>
-        </div>
-      </div>
+      ))}
 
       <hr />
 
@@ -77,7 +77,21 @@ const Wishlist = () => {
             Check
           </button>
         </div>
-        <button className="w-full flex justify-center items-center gap-x-5 text-center mt-4  py-2 bg-[#1B4B66] text-[#fff] rounded-md">
+        <button
+          className="w-full flex justify-center items-center gap-x-5 text-center mt-4  py-2 bg-[#1B4B66] text-[#fff] rounded-md"
+          onClick={() =>
+            dispatch(
+              addToCart({
+                id: products[0].id,
+                name: products[0].name,
+                subDescription: products[0].subDescription,
+                price: products[0].price,
+                image: products[0].image,
+                quantity,
+              })
+            )
+          }
+        >
           <AiOutlineShopping size={24} /> Add To Bag
         </button>
         <Link to={'/categories/1'}>

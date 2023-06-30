@@ -20,14 +20,14 @@ const Categories = () => {
   console.log(sort)
 
   const { data, loading, error } = useFetch(
-    `/categories/${cateId}?populate=products&_sort=${sort}`
+    `/categories/${cateId}?populate=products&filters[price][$lte]=100`
   ); 
   
   const { newData } = useFetch(
     `products?populate=*&_limit=4`
   );
 
-
+console.log(data)
   
 
   return (
@@ -59,12 +59,12 @@ const Categories = () => {
       </div>
       <div className={catStyle.bottom}>
         <div className={catStyle.left}>
-          <Accordion title="Size" id="1" />
-          <Accordion title="Color" id="2" />
-          <Accordion title="Brand" id="3" />
-          <Accordion title="Price Range" id="4" />
-          <Accordion title="Discount" id="5" />
-          <Accordion title="Availability" id="6" />
+          <Accordion title="Size" label="size" id="1" />
+          <Accordion title="Color" label="color" id="2" />
+          <Accordion title="Brand" label="Brand" id="3" />
+          <Accordion title="Price Range" label="price" id="4" />
+          <Accordion title="Discount" label="discount" id="5" />
+          <Accordion title="Availability" label="available" id="6" />
         </div>
         <div className={catStyle.right}>
           <div className={catStyle.tabs}>

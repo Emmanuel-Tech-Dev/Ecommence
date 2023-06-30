@@ -10,8 +10,10 @@ import Cart from '../Cart/Cart';
 import Wishlist from '../Wishlist/Wishlist';
 import { useState } from 'react';
 import useFetch from '../../hooks/usefetch';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
+
   const [open, setOpen] = useState(false);
   const handleCartOpen = () => {
     setOpen(!open);
@@ -25,7 +27,8 @@ const Navbar = () => {
   const { data, loading, error } = useFetch(`/categories?field=title`);
 
   // Replacing - with empy spaces
-
+const products = useSelector(state=>state.cart.products)
+const wish = useSelector(state=>state.wishlist.products)
   
   return (
     <>
@@ -46,7 +49,9 @@ const Navbar = () => {
               : data.map((item) => (
                   <div key={item.name}>
                     <Link to={`/categories/${item.id}`}>
-                      <li className={navStyle.li}>{item?.attributes?.title.replace(/_/g , " ")}</li>
+                      <li className={navStyle.li}>
+                        {item?.attributes?.title.replace(/_/g, ' ')}
+                      </li>
                     </Link>
                   </div>
                 ))}
@@ -62,20 +67,29 @@ const Navbar = () => {
             />
           </div>
           <div className={navStyle.icons}>
-            <AiOutlineHeart
+            <div className={navStyle.cart}>
+              <AiOutlineHeart
+                size={24}
+                color="#13101E"
+                onClick={handleWishOpen}
+                className="cursor-pointer"
+              />
+              <span className={navStyle.count}>{wish.length}</span>
+            </div>
+
+            <AiOutlineUser
               size={24}
               color="#13101E"
-              onClick={handleWishOpen}
+              className="cursor-pointer"
             />
-            <AiOutlineUser size={24} color="#13101E" />
             <div className={navStyle.cart}>
               <AiOutlineShopping
                 size={24}
                 color="#13101E"
-                className={navStyle.cartIcon}
+                className="cursor-pointer"
                 onClick={handleCartOpen}
               />
-              <span className={navStyle.count}>0</span>
+              <span className={navStyle.count}>{products.length}</span>
             </div>
           </div>
         </div>

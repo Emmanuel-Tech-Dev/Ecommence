@@ -8,7 +8,12 @@ import useFetch from '../../hooks/usefetch'
 
 const Collection = () => {
 
-  const {data , loading , error } = useFetch(`/categories?populate=*`)
+  const {data , loading , error } = useFetch(`/categories?_limit=4&populate=*`)
+
+
+  const filterProducts = data.slice(0, 4)
+
+
 
 console.log(data)
 
@@ -22,7 +27,7 @@ console.log(data)
             ? 'Something went wrong '
             : loading
             ? 'Loading Data...'
-            : data.map((item) => (
+            : filterProducts.map((item) => (
                 <div key={item.id}>
                   <Card item={item} />
                 </div>

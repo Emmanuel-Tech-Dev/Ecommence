@@ -4,7 +4,8 @@
   "info": {
     "singularName": "sub-category",
     "pluralName": "sub-categories",
-    "displayName": "subCategory"
+    "displayName": "subCategory",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,55 +13,16 @@
   "pluginOptions": {},
   "attributes": {
     "size": {
-      "type": "enumeration",
-      "enum": [
-        "small",
-        "medium",
-        "Large"
-      ]
+      "displayName": "size",
+      "type": "component",
+      "repeatable": false,
+      "component": "size-info.size"
     },
-    "color": {
-      "type": "enumeration",
-      "enum": [
-        "pink",
-        "red",
-        "black",
-        "blue"
-      ]
-    },
-    "brand": {
-      "type": "enumeration",
-      "enum": [
-        "zara",
-        "D&G",
-        "H&M",
-        "chanel",
-        "prada",
-        "biba"
-      ]
-    },
-    "priceRange": {
-      "type": "enumeration",
-      "enum": [
-        "c60",
-        "c100",
-        "c200",
-        "c350"
-      ]
-    },
-    "dicount": {
-      "type": "enumeration",
-      "enum": [
-        "c10",
-        "c20",
-        "c30",
-        "c40",
-        "c50",
-        "c65"
-      ]
-    },
-    "availability": {
-      "type": "boolean"
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "inversedBy": "sub_categories"
     },
     "products": {
       "type": "relation",

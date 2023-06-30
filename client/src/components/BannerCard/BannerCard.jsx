@@ -14,7 +14,7 @@ const BannerCard = () => {
          <div className={cardStyle.text}>
             <h4 className={cardStyle.h4}>LIFESTYLE</h4>
             <h1 className={cardStyle.h1}>Makeup Accessories From Top Brands</h1>
-            <Link to={'/categories/1'}>
+            <Link to={'/categories/6'}>
        <button className={cardStyle.button}>
         <BsArrowRight size={24}/> 
        </button>
@@ -28,7 +28,7 @@ const BannerCard = () => {
        </div>
         <div className={cardStyle.text2}>
                <h1 className={cardStyle.h1l}>Skincare Essentials</h1>
-            <Link to={'/categories/1'}>
+            <Link to={'/categories/5'}>
        <button className={cardStyle.buttonr}>
         <BsArrowRight size={24}/> 
        </button>
@@ -42,7 +42,7 @@ const BannerCard = () => {
        </div>
         <div className={cardStyle.text2}>
               <h1 className={cardStyle.h1r}>Facepacks & Peels</h1>
-            <Link to={'/categories/1'}>
+            <Link to={'/categories/5'}>
        <button className={cardStyle.buttonl}>
         <BsArrowRight size={24}/> 
        </button>

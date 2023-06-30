@@ -5,7 +5,9 @@ import { IoIosArrowForward } from 'react-icons/io';
 import { AiOutlineHeart, AiOutlineShopping } from 'react-icons/ai';
 import Card from '../../components/Cards/Card';
 import useFetch from '../../hooks/usefetch';
-
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../redux/cartReducer';
+import { addToWishlist } from '../../redux/wishlistReducer';
 
 
 const Product = () => {
@@ -14,36 +16,39 @@ const Product = () => {
   const [selectedImg, setSelectedImg] = useState('image');
   const [quantity, setQuantity] = useState(1);
   const [activeButton, setActiveButton] = useState('description');
-  
+
   const handleSetActiveButton = (button) => {
     setActiveButton(button);
   };
 
-  const {data } = useFetch(
-    `products/${id}?populate=*`
-  )
+  const limitNumRange = (number) => {
+    const results = (number % 4) + 1;
+    return results;
+  };
 
-  console.log(data)
+  const { data } = useFetch(`products/${id}?populate=*`);
 
-  // calclating for price discount 
+  console.log(data);
 
-  const oldPrice = data?.attributes?.price
+  // calclating for price discount
+
+  const oldPrice = data?.attributes?.price;
   const discount = data?.attributes?.discount;
 
-  const discountPrice = Math.round(oldPrice * (discount/100)) 
+  const discountPrice = Math.round(oldPrice * (discount / 100));
 
-const { newData } = useFetch(`/products?_limit=4&populate=*`);
+  const { newData } = useFetch(`/products?_limit=4&populate=*`);
 
-const filterProducts = newData
-  .slice()
-  .reverse()
-  .slice(0, 4)
-  .sort(
-    (a, b) =>
-      new Date(b.attributes.updatedAt) - new Date(a.attributes.updatedAt)
-  );
+  const filterProducts = newData
+    .slice()
+    .reverse()
+    .slice(0, 4)
+    .sort(
+      (a, b) =>
+        new Date(b.attributes.updatedAt) - new Date(a.attributes.updatedAt)
+    );
 
-
+  const dispatch = useDispatch();
   return (
     <div className={productStyle.container}>
       <div className="heading mt-10 mb-16">
@@ -53,8 +58,10 @@ const filterProducts = newData
           </Link>
 
           <IoIosArrowForward />
-          <Link to={`/categories/${id}`}>
-            <h1 className="opacity-[.4] text-[#1B4B66]">{data?.attributes?.categories?.data[0]?.attributes?.title}</h1>
+          <Link to={`/categories/${limitNumRange(id)}`}>
+            <h1 className="opacity-[.4] text-[#1B4B66]">
+              {data?.attributes?.categories?.data[0]?.attributes?.title}
+            </h1>
           </Link>
 
           <IoIosArrowForward />
@@ -185,10 +192,37 @@ const filterProducts = newData
           </div>
 
           <div className="buttons mt-10 flex items-center gap-x-5 ">
-            <button className="flex items-center gap-x-5 px-20 py-2 bg-[#1B4B66] text-[#fff] rounded-md">
+            <button
+              className="flex items-center gap-x-5 px-20 py-2 bg-[#1B4B66] text-[#fff] rounded-md"
+              onClick={() =>
+                dispatch(
+                  addToCart({
+                    id: data.id,
+                    name: data.attributes.name,
+                    subDescription: data.attributes.subDescription,
+                    price: discountPrice,
+                    image: data.attributes.image.data[0].attributes.url,
+                    quantity,
+                  })
+                )
+              }
+            >
               <AiOutlineShopping /> Add To Bag
             </button>
-            <button className="flex items-center gap-x-5 px-10 py-2 border-2 border-[#1B4B66] text-[#1B4B66] rounded-md">
+            <button
+              className="flex items-center gap-x-5 px-10 py-2 border-2 border-[#1B4B66] text-[#1B4B66] rounded-md"
+              onClick={() =>
+                dispatch(
+                  addToWishlist({
+                    id: data.id,
+                    name: data.attributes.name,
+                    subDescription: data.attributes.subDescription,
+                    image: data.attributes.image.data[0].attributes.url,
+                    price: discountPrice,
+                  })
+                )
+              }
+            >
               <AiOutlineHeart /> Add To Wishlist
             </button>
           </div>

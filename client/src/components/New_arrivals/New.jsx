@@ -6,11 +6,13 @@ import Card from '../Cards/Card'
 //importing styles
 import newStyle from './NewStyle'
 import useFetch from '../../hooks/usefetch'
+import { useDispatch} from 'react-redux'
 
 
 
 
 const New = () => {
+
 
   
 const { data, loading, error } = useFetch(
@@ -41,7 +43,7 @@ sort((a , b) =>
         </Link>
       </div>
 
-      <div className="card-section flex justify-between px-8 py-6">
+      <div className="card-section flex justify-between items-center px-8 py-6">
         {error
           ? 'Something went wrong '
           : loading

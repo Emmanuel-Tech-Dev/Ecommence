@@ -20,7 +20,7 @@ const NavStyle =
 
   cart: `relative `,
 
-  count: `absolute bg-[#FF8C4B] text-[5px] px-1 rounded-[50px] top-[0] right-[0]`,
+  count: `absolute bg-[#FF8C4B] text-[8px] px-1 rounded-[50px] top-[0] right-[0]`,
 
  
 
