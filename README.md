@@ -10,10 +10,10 @@ This is an e-commerce website built using React, Tailwind CSS, and Strapi as a C
 - Integration with a secure payment gateway (Stripe or Paystack).
 - Order tracking and history for customers.
 - Add to Cart and Wishlist
+- Search Products
 
 ## Features not Implemented
 
-- Search Products
 - filter by size , color , price, discount , availability 
 - Ratings from user 
 - user Authentication
