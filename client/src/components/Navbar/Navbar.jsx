@@ -8,12 +8,14 @@ import { Link } from 'react-router-dom';
 import navStyle from './NavbarStyle';
 import Cart from '../Cart/Cart';
 import Wishlist from '../Wishlist/Wishlist';
-import { useState } from 'react';
+import { useState  } from 'react';
 import useFetch from '../../hooks/usefetch';
 import { useSelector } from 'react-redux';
+import Search from '../Search/Search';
+
+
 
 const Navbar = () => {
-
   const [open, setOpen] = useState(false);
   const handleCartOpen = () => {
     setOpen(!open);
@@ -23,13 +25,37 @@ const Navbar = () => {
   const handleWishOpen = () => {
     setOpenWishlist(!openWishList);
   };
+ const [openSearch, setOpenSearch] = useState(false);
+ 
+ const handleOpen = () => {
+   setOpenSearch(true)
+ }
+
+ const handleBlur = () => {
+  setTimeout(() => {
+     setOpenSearch(false)
+     setSearch('')
+  } , 200)
+ 
+ }
 
   const { data, loading, error } = useFetch(`/categories?field=title`);
 
   // Replacing - with empy spaces
-const products = useSelector(state=>state.cart.products)
-const wish = useSelector(state=>state.wishlist.products)
-  
+  const products = useSelector((state) => state.cart.products);
+  const wish = useSelector((state) => state.wishlist.products);
+
+  //Creating a state for the search input
+  const [search, setSearch] = useState('');
+
+  const handleChange = (e) => {
+    setSearch(e.target.value)
+    
+  }
+
+
+
+  console.log(search)
   return (
     <>
       <div className={navStyle.nav}>
@@ -47,7 +73,7 @@ const wish = useSelector(state=>state.wishlist.products)
               : loading
               ? 'Loading Data...'
               : data.map((item) => (
-                  <div key={item.name}>
+                  <div key={item.id}>
                     <Link to={`/categories/${item.id}`}>
                       <li className={navStyle.li}>
                         {item?.attributes?.title.replace(/_/g, ' ')}
@@ -58,14 +84,27 @@ const wish = useSelector(state=>state.wishlist.products)
           </div>
         </div>
         <div className={navStyle.right}>
-          <div className={navStyle.inputField}>
-            <AiOutlineSearch size={24} color="#13101E" />
-            <input
-              className={navStyle.input}
-              type="text"
-              placeholder="Search for products or brands..."
-            />
-          </div>
+          <form >
+            <div className={navStyle.inputField}>
+              <AiOutlineSearch
+                size={24}
+                color="#13101E"
+                className="cursor-pointer"
+              />
+              <input
+                className={navStyle.input}
+                type="text"
+                placeholder="Search for products or brands..."
+               value={search}
+                name="search"
+                onChange={handleChange}
+                autoComplete="off"
+                onFocus={handleOpen}
+                onBlur={handleBlur}
+              />
+            </div>
+          </form>
+
           <div className={navStyle.icons}>
             <div className={navStyle.cart}>
               <AiOutlineHeart
@@ -97,6 +136,14 @@ const wish = useSelector(state=>state.wishlist.products)
 
       {open && <Cart />}
       {openWishList && <Wishlist />}
+
+      {openSearch && (
+        <Search
+          search={search}
+          setSearch={setSearch}
+          
+        />
+      )}
     </>
   );
 };

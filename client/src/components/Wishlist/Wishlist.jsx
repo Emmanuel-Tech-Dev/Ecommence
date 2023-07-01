@@ -1,4 +1,4 @@
-import React , {useState , useEffect} from 'react'
+import { useState } from 'react';
 
 import { Link } from 'react-router-dom';
 import { AiOutlineShopping, AiOutlineClose } from 'react-icons/ai';
@@ -7,15 +7,13 @@ import { removeItem } from '../../redux/wishlistReducer';
 import { addToCart } from '../../redux/cartReducer';
 
 const Wishlist = () => {
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
+  const products = useSelector((state) => state.wishlist.products);
 
-  const products =useSelector((state) => state.wishlist.products);
+  console.log(products);
 
-  console.log(products)
-  
-   const [quantity, setQuantity] = useState(1);
-  
+  const [quantity, setQuantity] = useState(1);
 
   return (
     <div className=" absolute z-[999] right-[8%] bg-[#fff] px-5 py-3 shadow rounded w-[25%] ">
@@ -60,7 +58,6 @@ const Wishlist = () => {
             </button>
             <span className="font-medium text-[#1B4B66]">${item.price}</span>
           </div>
-          
         </div>
       ))}
 
@@ -102,6 +99,6 @@ const Wishlist = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Wishlist
+export default Wishlist;

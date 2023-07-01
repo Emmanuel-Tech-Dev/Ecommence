@@ -1,38 +1,28 @@
-import { FaTwitter, FaYoutube, FaFacebookF } from 'react-icons/fa'
-import { IoLocation } from 'react-icons/io5'
-import { RiInstagramFill } from 'react-icons/ri'
-import { Link } from 'react-router-dom'
+import { FaTwitter, FaYoutube, FaFacebookF } from 'react-icons/fa';
+import { IoLocation } from 'react-icons/io5';
+import { RiInstagramFill } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
 
-import footerStyle from './FooterStyle'
-import useFetch from '../../hooks/usefetch'
-
-
+import footerStyle from './FooterStyle';
+import useFetch from '../../hooks/usefetch';
 
 const linksA = [
-
-  { name: "Contact Us" },
-  { name: "About Us" },
-  { name: "Careers" },
-  { name: "Press" },
-
-]
+  { name: 'Contact Us' },
+  { name: 'About Us' },
+  { name: 'Careers' },
+  { name: 'Press' },
+];
 
 const linksP = [
-
-  { name: "Return Policy" },
-  { name: "Terms of Use" },
-  { name: "Sitemap" },
-  { name: "Security" },
-  { name: "Privacy" },
-  { name: "EPR Compliance" },
-
-]
-
-
-
+  { name: 'Return Policy' },
+  { name: 'Terms of Use' },
+  { name: 'Sitemap' },
+  { name: 'Security' },
+  { name: 'Privacy' },
+  { name: 'EPR Compliance' },
+];
 
 const Footer = () => {
-
   const { data } = useFetch(`/categories?field=title`);
 
   return (
@@ -42,12 +32,12 @@ const Footer = () => {
           <h1 className={footerStyle.h1}>Shop by Category</h1>
           <div className="links">
             {data.map((item) => (
-              <div key={item.name}>
+              <div key={item.id}>
                 <Link to={`/categories/${item.id}`}>
-                <li className={footerStyle.links}>
-                  {' '}
-                  {item?.attributes?.title.replace(/_/g, ' ')}
-                </li>
+                  <li className={footerStyle.links}>
+                    {' '}
+                    {item?.attributes?.title.replace(/_/g, ' ')}
+                  </li>
                 </Link>
               </div>
             ))}
@@ -98,6 +88,6 @@ const Footer = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Footer
+export default Footer;

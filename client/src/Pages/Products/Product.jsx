@@ -27,16 +27,11 @@ const Product = () => {
   };
 
   const { data } = useFetch(`products/${id}?populate=*`);
-
-  console.log(data);
-
+  
   // calclating for price discount
-
   const oldPrice = data?.attributes?.price;
   const discount = data?.attributes?.discount;
-
   const discountPrice = Math.round(oldPrice * (discount / 100));
-
   const { newData } = useFetch(`/products?_limit=4&populate=*`);
 
   const filterProducts = newData

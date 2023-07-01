@@ -17,17 +17,13 @@ const Categories = () => {
 
   const [sort , setSort] =useState('handbags')
 
-  console.log(sort)
 
   const { data, loading, error } = useFetch(
     `/categories/${cateId}?populate=products&filters[price][$lte]=100`
   ); 
   
-  const { newData } = useFetch(
-    `products?populate=*&_limit=4`
-  );
+  
 
-console.log(data)
   
 
   return (

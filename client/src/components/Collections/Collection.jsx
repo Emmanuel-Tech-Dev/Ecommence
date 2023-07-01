@@ -1,21 +1,12 @@
+import Card from '../Cards/Card_T';
 
-import Card from '../Cards/Card_T'
-
-import collStyle from './CollectionStyle'
-import useFetch from '../../hooks/usefetch'
-
-
+import collStyle from './CollectionStyle';
+import useFetch from '../../hooks/usefetch';
 
 const Collection = () => {
+  const { data, loading, error } = useFetch(`/categories?_limit=4&populate=*`);
 
-  const {data , loading , error } = useFetch(`/categories?_limit=4&populate=*`)
-
-
-  const filterProducts = data.slice(0, 4)
-
-
-
-console.log(data)
+  const filterProducts = data.slice(0, 4);
 
 
   return (
@@ -36,6 +27,6 @@ console.log(data)
       </div>
     </div>
   );
-}
+};
 
-export default Collection
+export default Collection;
