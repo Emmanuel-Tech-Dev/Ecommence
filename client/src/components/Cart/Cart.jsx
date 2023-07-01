@@ -47,7 +47,10 @@ const taxAmount = total * taxPercentage.toFixed(2);
             </div>
           </div>
           <div className="right flex flex-col justify-between items-end">
-            <button onClick={() => dispatch(removeItem(item.id))} className='cursor-pointer'>
+            <button
+              onClick={() => dispatch(removeItem(item.id))}
+              className="cursor-pointer"
+            >
               <AiOutlineClose />
             </button>
             <span className="text-[#1B4B66] font-semibold">
@@ -84,9 +87,12 @@ const taxAmount = total * taxPercentage.toFixed(2);
             Check
           </button>
         </div>
-        <button className="w-full text-center mt-4  py-2 bg-[#1B4B66] text-[#fff] rounded-md">
-          Place Order
-        </button>
+        <Link to={'/checkout/information'}>
+          <button className="w-full text-center mt-4  py-2 bg-[#1B4B66] text-[#fff] rounded-md">
+            Place Order
+          </button>
+        </Link>
+
         <Link to={'/categories/1'}>
           <button className="w-full text-center mt-5 text-[14px]  text-[#1B4B66] underline rounded-md">
             Continue Shopping
