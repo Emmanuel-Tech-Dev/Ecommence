@@ -10,10 +10,10 @@ This is an e-commerce website built using React, Tailwind CSS, and Strapi as a C
 - Integration with a secure payment gateway (Stripe or Paystack).
 - Order tracking and history for customers.
 - Add to Cart and Wishlist
+- Search Products
 
 ## Features not Implemented
 
-- Search Products
 - filter by size , color , price, discount , availability 
 - Ratings from user 
 - user Authentication
@@ -22,4 +22,11 @@ This is an e-commerce website built using React, Tailwind CSS, and Strapi as a C
 - order list
 - payment
 - Mobile Responsiveness
+
+
+## A video Update 
+
+https://github.com/Emmanuel-Tech-Dev/Ecommence/assets/65460128/4a4495e2-49fa-4dd0-9141-f07375a76650
+
+
 
