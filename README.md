@@ -26,4 +26,4 @@ This is an e-commerce website built using React, Tailwind CSS, and Strapi as a C
 
 ## A video Update 
 
-https://github.com/Emmanuel-Tech-Dev/Ecommence/assets/65460128/a73e2bfa-2c33-4a44-95db-1ae58c8f6de3
+
