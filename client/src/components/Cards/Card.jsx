@@ -7,7 +7,7 @@ import cardStyle from './CardStyle'
 import { useDispatch } from 'react-redux';
 import { addToWishlist, removeItem } from '../../redux/wishlistReducer';
 import { toast } from 'react-toastify';
-import {ToggleContext} from '../../../WishlistContext'
+
 
 
 const Card = ({item}) => {
@@ -20,9 +20,8 @@ const Card = ({item}) => {
     
     const dispatch = useDispatch()
 
-const { click, setClicked } = useContext(ToggleContext);
 
-
+   const [click , setClicked] = useState(false)
 
      const handleDispatch = () => {
        if (!click) {
@@ -58,9 +57,9 @@ const { click, setClicked } = useContext(ToggleContext);
            progress: undefined,
            theme: 'light',
          });
-           setClicked(!click);
+           setClicked(false);
        }
-     setClicked(!click);
+ setClicked(!click);
        
      };
 

@@ -6,14 +6,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeItem } from '../../redux/wishlistReducer';
 import { addToCart } from '../../redux/cartReducer';
 import { toast } from 'react-toastify';
-import { ToggleContext } from '../../../WishlistContext';
+
 
 const Wishlist = ({ openWishlist  , setOpenWishlist}) => {
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.wishlist.products);
 
-  const {click , setClicked} = useContext(ToggleContext)
+  
 
   
 
@@ -29,7 +29,7 @@ const Wishlist = ({ openWishlist  , setOpenWishlist}) => {
       })
     );
 
-    toast.success(`${products[0].name} Add to your cart list`, {
+    toast.success(`${products[0].name} Added to your cart list`, {
       position: 'top-center',
       autoClose: 2000,
       hideProgressBar: false,
@@ -64,10 +64,7 @@ const Wishlist = ({ openWishlist  , setOpenWishlist}) => {
     setOpenWishlist(!openWishlist);
   };
 
-  const handleCartTimeOut = () => {
-    setOpenWishlist(!openWishlist);
-  };
-
+ 
 
 
   const [quantity, setQuantity] = useState(1);
