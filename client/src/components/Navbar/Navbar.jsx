@@ -136,7 +136,7 @@ const Navbar = () => {
       </div>
 
       {open && <Cart open={open} setOpen={setOpen} />}
-      {openWishList && <Wishlist setOpenWishlist={setOpenWishlist} />}
+      {openWishList && <Wishlist  openWishlist={openWishList}  setOpenWishlist={setOpenWishlist} />}
 
       {openSearch && (
         <Search

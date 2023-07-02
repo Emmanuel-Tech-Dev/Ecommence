@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux';
 import { removeItem } from '../../redux/cartReducer';
+import { toast } from 'react-toastify';
+
+
 const Cart = ({setOpen , open}) => {
 
   const products = useSelector(state=>state.cart.products)
@@ -23,12 +26,26 @@ const taxAmount = total * taxPercentage.toFixed(2);
 
 
 const handleCart = () => {
+   setOpen(!open)
+}
+
+const handleCartTimeOut = () => { 
   setOpen(!open)
 }
-const handleCartTimeOut = () => {
- 
-  setOpen(!open)
-}
+
+  const handleRemove = () => {
+    dispatch(removeItem(products[0].id));
+    toast.success(`${products[0].name} Remove From Cart List`, {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    });
+  };
 
 console.log(!open)
 
@@ -63,7 +80,7 @@ console.log(!open)
           </div>
           <div className="right flex flex-col justify-between items-end">
             <button
-              onClick={() => dispatch(removeItem(item.id))}
+              onClick={handleRemove}
               className="cursor-pointer"
             >
               <AiOutlineClose />
@@ -114,6 +131,7 @@ console.log(!open)
           </button>
         </Link>
       </div>
+     
     </div>
   );
 };

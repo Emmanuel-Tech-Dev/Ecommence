@@ -1,24 +1,81 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 import { AiOutlineShopping, AiOutlineClose } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeItem } from '../../redux/wishlistReducer';
 import { addToCart } from '../../redux/cartReducer';
+import { toast } from 'react-toastify';
+import { ToggleContext } from '../../../WishlistContext';
 
-const Wishlist = () => {
+const Wishlist = ({ openWishlist  , setOpenWishlist}) => {
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.wishlist.products);
 
-  console.log(products);
+  const {click , setClicked} = useContext(ToggleContext)
+
+  
+
+  const handleDispatch = () => {
+    dispatch(
+      addToCart({
+        id: products[0].id,
+        name: products[0].name,
+        subDescription: products[0].subDescription,
+        price: products[0].price,
+        image: products[0].image,
+        quantity,
+      })
+    );
+
+    toast.success(`${products[0].name} Add to your cart list`, {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    });
+     setOpenWishlist(!openWishlist);
+  };
+
+  const handleRemove = () =>{
+   dispatch(removeItem(products[0].id));
+     toast.error(`${products[0].name} Remove From Wishlist`, {
+       position: 'top-center',
+       autoClose: 2000,
+       hideProgressBar: false,
+       closeOnClick: true,
+       pauseOnHover: true,
+       draggable: true,
+       progress: undefined,
+       theme: 'light',
+     });
+
+     setClicked(!click)
+  }
+
+
+
+  const handleCart = () => {
+    setOpenWishlist(!openWishlist);
+  };
+
+  const handleCartTimeOut = () => {
+    setOpenWishlist(!openWishlist);
+  };
+
+
 
   const [quantity, setQuantity] = useState(1);
 
   return (
     <div className=" absolute z-[999] right-[8%] bg-[#fff] px-5 py-3 shadow rounded w-[25%] ">
       <div className="top font-semibold text-[#1B4B66] flex items-center justify-between">
-        <button>Back</button>
+        <button onClick={handleCart}>Back</button>
         <h1 className=" text-[20px]">My Wishlist</h1>
       </div>
       {products.map((item) => (
@@ -54,7 +111,7 @@ const Wishlist = () => {
           </div>
           <div className="right flex flex-col justify-between items-end">
             <button>
-              <AiOutlineClose onClick={() => dispatch(removeItem(item.id))} />
+              <AiOutlineClose onClick={handleRemove} />
             </button>
             <span className="font-medium text-[#1B4B66]">${item.price}</span>
           </div>
@@ -76,23 +133,14 @@ const Wishlist = () => {
         </div>
         <button
           className="w-full flex justify-center items-center gap-x-5 text-center mt-4  py-2 bg-[#1B4B66] text-[#fff] rounded-md"
-          onClick={() =>
-            dispatch(
-              addToCart({
-                id: products[0].id,
-                name: products[0].name,
-                subDescription: products[0].subDescription,
-                price: products[0].price,
-                image: products[0].image,
-                quantity,
-              })
-            )
-          }
+          onClick={handleDispatch}
         >
           <AiOutlineShopping size={24} /> Add To Bag
         </button>
         <Link to={'/categories/1'}>
-          <button className="w-full text-center mt-5 text-[14px]  text-[#1B4B66] underline rounded-md">
+          <button className="w-full text-center mt-5 text-[14px]  text-[#1B4B66] underline rounded-md"
+          onClick={handleCart}
+          >
             Continue Shopping
           </button>
         </Link>

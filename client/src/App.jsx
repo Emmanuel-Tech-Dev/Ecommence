@@ -5,7 +5,8 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { useEffect } from 'react';
-
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 //importing components
 import Home from './Pages/Home/Home';
 import Category from './Pages/Categories/Categories';
@@ -84,6 +85,18 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 }
