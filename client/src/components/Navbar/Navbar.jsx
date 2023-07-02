@@ -24,6 +24,7 @@ const Navbar = () => {
   const [openWishList, setOpenWishlist] = useState(false);
   const handleWishOpen = () => {
     setOpenWishlist(!openWishList);
+    
   };
  const [openSearch, setOpenSearch] = useState(false);
  
@@ -134,8 +135,8 @@ const Navbar = () => {
         </div>
       </div>
 
-      {open && <Cart />}
-      {openWishList && <Wishlist />}
+      {open && <Cart open={open} setOpen={setOpen} />}
+      {openWishList && <Wishlist setOpenWishlist={setOpenWishlist} />}
 
       {openSearch && (
         <Search

@@ -15,6 +15,7 @@ import Payment from './Pages/CheckoutPayment/Payment';
 import About from './Pages/About/About';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
+import MyCart from './Pages/My_cart/MyCart';
 
 function App() {
   const Layout = () => {
@@ -62,6 +63,9 @@ function App() {
           element: <Product />,
         },
         {
+          path: '/mycart',
+          element: <MyCart />,
+        },{
           path: '/checkout/information',
           element: <CheckoutInfo />,
         },

@@ -34,6 +34,8 @@ const Product = () => {
   const discountPrice = Math.round(oldPrice * (discount / 100));
   const { newData } = useFetch(`/products?_limit=4&populate=*`);
 
+  console.log(data)
+
   const filterProducts = newData
     .slice()
     .reverse()

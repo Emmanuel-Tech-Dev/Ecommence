@@ -3,7 +3,7 @@ import Card from '../Cards/Card';
 import useFetch from '../../hooks/usefetch';
 
 // eslint-disable-next-line react/prop-types
-const List = ({ cateId }) => {
+const List = ({ cateId , sort }) => {
   const { data, loading, error } = useFetch(
     `products?populate=*&[filters][categories][id]=${cateId}`
   );

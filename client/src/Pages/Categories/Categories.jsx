@@ -1,30 +1,20 @@
-
-
-import Accordion from '../../components/Accordion/Accordion'
-import Card from '../../components/Cards/Card'
-import { CgMenuGridR } from 'react-icons/cg'
-import { IoIosArrowForward } from 'react-icons/io'
-import catStyle from './CategoriesStyle'
-import Pagination from '../../components/Pagination/Pagination'
-import List from '../../components/List/LIst'
+import Accordion from '../../components/Accordion/Accordion';
+import { CgMenuGridR } from 'react-icons/cg';
+import { IoIosArrowForward } from 'react-icons/io';
+import catStyle from './CategoriesStyle';
+import Pagination from '../../components/Pagination/Pagination';
+import List from '../../components/List/LIst';
 import { Link, useParams } from 'react-router-dom';
-import useFetch from '../../hooks/usefetch'
-import { useState } from 'react'
+import useFetch from '../../hooks/usefetch';
+import { useState } from 'react';
 
 const Categories = () => {
-
   const cateId = parseInt(useParams().id);
 
-  const [sort , setSort] =useState('handbags')
+  const [sort, setSort] = useState('');
 
-
-  const { data, loading, error } = useFetch(
-    `/categories/${cateId}?populate=products&filters[price][$lte]=100`
-  ); 
-  
-  
-
-  
+  console.log(sort);
+  const { data } = useFetch(`/categories/${cateId}?populate=*`);
 
   return (
     <div className={catStyle.container}>
@@ -89,7 +79,8 @@ const Categories = () => {
                   className={catStyle.select}
                   onChange={(e) => setSort(e.target.value)}
                 >
-                  <option value="handbags">Coach</option>
+                  <option value="handbags">handbags</option>
+
                   <option value="personalCare">Personal Care</option>
                   <option value="watches">Watches</option>
                   <option value="glasses">Glasses</option>
@@ -98,7 +89,7 @@ const Categories = () => {
             </div>
           </div>
           <div className="">
-            <List cateId={cateId} />
+            <List cateId={cateId} sort={sort} />
           </div>
           <div className="pagination mt-20">
             <Pagination />
@@ -107,6 +98,6 @@ const Categories = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Categories
+export default Categories;

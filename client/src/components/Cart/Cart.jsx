@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux';
 import { removeItem } from '../../redux/cartReducer';
-const Cart = () => {
+const Cart = ({setOpen , open}) => {
 
   const products = useSelector(state=>state.cart.products)
 const dispatch = useDispatch()
@@ -22,12 +22,27 @@ const taxAmount = total * taxPercentage.toFixed(2);
 };
 
 
+const handleCart = () => {
+  setOpen(!open)
+}
+const handleCartTimeOut = () => {
+ 
+  setOpen(!open)
+}
+
+console.log(!open)
+
   return (
     <div className=" absolute z-[999] right-8 bg-[#fff] px-5 py-3 shadow rounded w-[25%] ">
       <div className="top font-semibold text-[#1B4B66] flex items-center justify-between">
-        <button>Back</button>
-        <h1 className=" text-[20px]">My Cart List</h1>
+       
+        <button onClick={handleCart}>Back</button>
+        <Link to={`/mycart`}> 
+        <h1 className=" text-[20px]" onClick={handleCart}>My Cart List</h1>
+        </Link>
+       
       </div>
+      
       {products.map((item) => (
         <div key={item.id} className="my-10 flex justify-between">
           <div className="left flex gap-x-5">
@@ -87,14 +102,14 @@ const taxAmount = total * taxPercentage.toFixed(2);
             Check
           </button>
         </div>
-        <Link to={'/checkout/information'}>
-          <button className="w-full text-center mt-4  py-2 bg-[#1B4B66] text-[#fff] rounded-md">
+        <Link to={'/mycart'}>
+          <button className="w-full text-center mt-4  py-2 bg-[#1B4B66] text-[#fff] rounded-md" onClick={handleCartTimeOut} >
             Place Order
           </button>
         </Link>
 
         <Link to={'/categories/1'}>
-          <button className="w-full text-center mt-5 text-[14px]  text-[#1B4B66] underline rounded-md">
+          <button className="w-full text-center mt-5 text-[14px]  text-[#1B4B66] underline rounded-md" onClick={handleCartTimeOut}>
             Continue Shopping
           </button>
         </Link>
