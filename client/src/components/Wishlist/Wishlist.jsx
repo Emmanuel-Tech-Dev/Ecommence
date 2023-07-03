@@ -1,4 +1,5 @@
-import { useContext, useState } from 'react';
+/* eslint-disable react/prop-types */
+
 
 import { Link } from 'react-router-dom';
 import { AiOutlineShopping, AiOutlineClose } from 'react-icons/ai';
@@ -6,30 +7,57 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeItem } from '../../redux/wishlistReducer';
 import { addToCart } from '../../redux/cartReducer';
 import { toast } from 'react-toastify';
+import { useState } from 'react';
 
-
-const Wishlist = ({ openWishlist  , setOpenWishlist}) => {
+const Wishlist = ({ openWishlist, setOpenWishlist }) => {
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.wishlist.products);
 
-  
-
-  
-
   const handleDispatch = () => {
-    dispatch(
-      addToCart({
-        id: products[0].id,
-        name: products[0].name,
-        subDescription: products[0].subDescription,
-        price: products[0].price,
-        image: products[0].image,
-        quantity,
-      })
-    );
+    products.forEach((item) => {
+      dispatch(
+        addToCart({
+          id: item.id,
+          name: item.name,
+          subDescription: item.subDescription,
+          price: item.price,
+          image: item.image,
+          quantity,
+        })
+      );
+    });
 
-    toast.success(`${products[0].name} Added to your cart list`, {
+    if (products.length > 1) {
+      toast.success('All items in the wishlist are added to your cart', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+    } else if (products.length === 1) {
+      toast.success(`${products[0].name} Added to your cart list`, {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+    }
+
+    setOpenWishlist(!openWishlist);
+  };
+
+  const handleRemove = () => {
+    dispatch(removeItem(products[0].id));
+    toast.error(`${products[0].name} Remove From Wishlist`, {
       position: 'top-center',
       autoClose: 2000,
       hideProgressBar: false,
@@ -39,33 +67,13 @@ const Wishlist = ({ openWishlist  , setOpenWishlist}) => {
       progress: undefined,
       theme: 'light',
     });
-     setOpenWishlist(!openWishlist);
+
+   
   };
-
-  const handleRemove = () =>{
-   dispatch(removeItem(products[0].id));
-     toast.error(`${products[0].name} Remove From Wishlist`, {
-       position: 'top-center',
-       autoClose: 2000,
-       hideProgressBar: false,
-       closeOnClick: true,
-       pauseOnHover: true,
-       draggable: true,
-       progress: undefined,
-       theme: 'light',
-     });
-
-     setClicked(!click)
-  }
-
-
 
   const handleCart = () => {
     setOpenWishlist(!openWishlist);
   };
-
- 
-
 
   const [quantity, setQuantity] = useState(1);
 
@@ -75,45 +83,53 @@ const Wishlist = ({ openWishlist  , setOpenWishlist}) => {
         <button onClick={handleCart}>Back</button>
         <h1 className=" text-[20px]">My Wishlist</h1>
       </div>
-      {products.map((item) => (
-        <div key={item.id} className="my-10 flex justify-between">
-          <div className="left flex gap-x-5">
-            <img
-              className="w-[100px]"
-              src={'http://localhost:1338' + item.image}
-            />{' '}
-            <div className="">
-              <h1 className="font-semibold text-[#1B4B66] mb-2">{item.name}</h1>
-              <span className="text-[#626262]">{item.subDescription}</span>
-              <div className="counter border mt-2 border-[#1B4B66] w-[100px] justify-between rounded-md flex items-center">
-                <button
-                  className="px-2 text-[24px]"
-                  onClick={() => {
-                    setQuantity((prev) => (prev === 1 ? 1 : prev - 1));
-                  }}
-                >
-                  -
-                </button>
-                <span>{quantity}</span>
-                <button
-                  className="px-2 text-[24px]"
-                  onClick={() => {
-                    setQuantity((prev) => prev + 1);
-                  }}
-                >
-                  +
-                </button>
+      {products.length === 0 ? (
+        <span className="text-center flex justify-center items-center mt-10 mb-10 text-[16px] opacity-[.3] font-semibold">
+          Your wishlist is empty
+        </span>
+      ) : (
+        products.map((item) => (
+<div key={item.id} className="my-10 flex justify-between">
+            <div className="left flex gap-x-5">
+              <img
+                className="w-[100px]"
+                src={'http://localhost:1338' + item.image}
+              />{' '}
+              <div className="">
+                <h1 className="font-semibold text-[#1B4B66] mb-2">
+                  {item.name}
+                </h1>
+                <span className="text-[#626262]">{item.subDescription}</span>
+                <div className="counter border mt-2 border-[#1B4B66] w-[100px] justify-between rounded-md flex items-center">
+                  <button
+                    className="px-2 text-[24px]"
+                    onClick={() => {
+                      setQuantity((prev) => (prev === 1 ? 1 : prev - 1));
+                    }}
+                  >
+                    -
+                  </button>
+                  <span>{quantity}</span>
+                  <button
+                    className="px-2 text-[24px]"
+                    onClick={() => {
+                      setQuantity((prev) => prev + 1);
+                    }}
+                  >
+                    +
+                  </button>
+                </div>
               </div>
             </div>
+            <div className="right flex flex-col justify-between items-end">
+              <button>
+                <AiOutlineClose onClick={handleRemove} />
+              </button>
+              <span className="font-medium text-[#1B4B66]">${item.price}</span>
+            </div>
           </div>
-          <div className="right flex flex-col justify-between items-end">
-            <button>
-              <AiOutlineClose onClick={handleRemove} />
-            </button>
-            <span className="font-medium text-[#1B4B66]">${item.price}</span>
-          </div>
-        </div>
-      ))}
+        ))
+      )}
 
       <hr />
 
@@ -135,8 +151,9 @@ const Wishlist = ({ openWishlist  , setOpenWishlist}) => {
           <AiOutlineShopping size={24} /> Add To Bag
         </button>
         <Link to={'/categories/1'}>
-          <button className="w-full text-center mt-5 text-[14px]  text-[#1B4B66] underline rounded-md"
-          onClick={handleCart}
+          <button
+            className="w-full text-center mt-5 text-[14px]  text-[#1B4B66] underline rounded-md"
+            onClick={handleCart}
           >
             Continue Shopping
           </button>

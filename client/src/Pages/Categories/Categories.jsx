@@ -1,19 +1,15 @@
 import Accordion from '../../components/Accordion/Accordion';
-import { CgMenuGridR } from 'react-icons/cg';
+
 import { IoIosArrowForward } from 'react-icons/io';
 import catStyle from './CategoriesStyle';
-import Pagination from '../../components/Pagination/Pagination';
+
 import List from '../../components/List/LIst';
 import { Link, useParams } from 'react-router-dom';
 import useFetch from '../../hooks/usefetch';
-import { useState } from 'react';
 
 const Categories = () => {
   const cateId = parseInt(useParams().id);
 
-  const [sort, setSort] = useState('');
-
-  console.log(sort);
   const { data } = useFetch(`/categories/${cateId}?populate=*`);
 
   return (
@@ -27,7 +23,7 @@ const Categories = () => {
           <h4 className={catStyle.h4}>BLACK FRIDAY</h4>
         </div>
       </div>
-      <div className="heading mt-16 -mb-10">
+      <div className="heading mt-16 -mb-5">
         <div className="cramps flex items-center gap-x-2 text-[14px] font-meduim ">
           <Link to={'/'}>
             <h1 className="opacity-[.4]">Home</h1>
@@ -53,46 +49,8 @@ const Categories = () => {
           <Accordion title="Availability" label="available" id="6" />
         </div>
         <div className={catStyle.right}>
-          <div className={catStyle.tabs}>
-            <div className={catStyle.leftSm}>
-              <div className="icon bg-[#1B4B66]">
-                <CgMenuGridR size={24} color="#fefe" />
-              </div>
-              <span>
-                Showing 1 - {data?.attributes?.products?.data?.length} of{' '}
-                {data?.attributes?.products?.data?.length}
-              </span>
-            </div>
-
-            <div className={catStyle.rightSm}>
-              <div className="count flex items-center gap-x-3">
-                <h1>To show:</h1>
-                <span className="bg-[#F1F1F1] px-4 py-2 rounded">
-                  {data?.attributes?.products?.data?.length}
-                </span>
-              </div>
-              <div className="sort flex items-center gap-x-3">
-                <label htmlFor="sort">Sort By:</label>
-                <select
-                  name=""
-                  id="sort"
-                  className={catStyle.select}
-                  onChange={(e) => setSort(e.target.value)}
-                >
-                  <option value="handbags">handbags</option>
-
-                  <option value="personalCare">Personal Care</option>
-                  <option value="watches">Watches</option>
-                  <option value="glasses">Glasses</option>
-                </select>
-              </div>
-            </div>
-          </div>
           <div className="">
-            <List cateId={cateId} sort={sort} />
-          </div>
-          <div className="pagination mt-20">
-            <Pagination />
+            <List cateId={cateId} />
           </div>
         </div>
       </div>

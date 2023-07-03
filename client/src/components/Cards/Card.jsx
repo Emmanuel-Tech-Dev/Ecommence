@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import {Link} from 'react-router-dom'
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 //importing Card style
 import cardStyle from './CardStyle'
@@ -21,7 +21,13 @@ const Card = ({item}) => {
     const dispatch = useDispatch()
 
 
-   const [click , setClicked] = useState(false)
+   const [click, setClicked] = useState(
+     JSON.parse(localStorage.getItem(`click-${item.id}`)) || false
+   );
+
+   useEffect(() => {
+   localStorage.setItem(`click-${item.id}`, JSON.stringify(click));
+   } , [click , item.id])
 
      const handleDispatch = () => {
        if (!click) {

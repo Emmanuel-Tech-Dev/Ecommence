@@ -204,7 +204,7 @@ const Product = () => {
                 )
               }
             >
-              <AiOutlineShopping /> Add To Bag
+              <AiOutlineShopping size={24} /> Add To Bag
             </button>
             <button
               className="flex items-center gap-x-5 px-10 py-2 border-2 border-[#1B4B66] text-[#1B4B66] rounded-md"
@@ -220,7 +220,7 @@ const Product = () => {
                 )
               }
             >
-              <AiOutlineHeart /> Add To Wishlist
+              <AiOutlineHeart size={24} /> Add To Wishlist
             </button>
           </div>
         </div>

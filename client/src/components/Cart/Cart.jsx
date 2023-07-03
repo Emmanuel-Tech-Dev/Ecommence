@@ -35,7 +35,7 @@ const handleCartTimeOut = () => {
 
   const handleRemove = () => {
     dispatch(removeItem(products[0].id));
-    toast.success(`${products[0].name} Remove From Cart List`, {
+    toast.error(`${products[0].name} Remove From Cart List`, {
       position: 'top-center',
       autoClose: 2000,
       hideProgressBar: false,
@@ -50,47 +50,52 @@ const handleCartTimeOut = () => {
 console.log(!open)
 
   return (
-    <div className=" absolute z-[999] right-8 bg-[#fff] px-5 py-3 shadow rounded w-[25%] ">
+    <div className=" absolute z-[9999] right-8 bg-[#fff] px-5 py-3 shadow rounded w-[25%] ">
       <div className="top font-semibold text-[#1B4B66] flex items-center justify-between">
-       
         <button onClick={handleCart}>Back</button>
-        <Link to={`/mycart`}> 
-        <h1 className=" text-[20px]" onClick={handleCart}>My Cart List</h1>
+        <Link to={`/mycart`}>
+          <h1 className=" text-[20px]" onClick={handleCart}>
+            My Cart List
+          </h1>
         </Link>
-       
       </div>
-      
-      {products.map((item) => (
-        <div key={item.id} className="my-10 flex justify-between">
-          <div className="left flex gap-x-5">
-            <img
-              className="w-[100px]"
-              src={'http://localhost:1338' + item.image}
-            />
-            <div className="">
-              <h1 className="font-semibold text-[#1B4B66] mb-2">{item.name}</h1>
-              <span className="text-[#626262]">{item.subDescription}</span>
-              <div className="counter mt-2  w-[100px] justify-between rounded-md flex items-center">
-                <span className="text-[#1B4B66]">
-                  {' '}
-                  {item.quantity} x ${item.price}
-                </span>
+
+      {products.length === 0 ? (
+        <span className="text-center flex justify-center items-center mt-10 mb-10 text-[16px] opacity-[.3] font-semibold">
+          Your Cartlist is empty
+        </span>
+      ) : (
+        products.map((item) => (
+          <div key={item.id} className="my-10 flex justify-between">
+            <div className="left flex gap-x-5">
+              <img
+                className="w-[100px]"
+                src={'http://localhost:1338' + item.image}
+              />
+              <div className="">
+                <h1 className="font-semibold text-[#1B4B66] mb-2">
+                  {item.name}
+                </h1>
+                <span className="text-[#626262]">{item.subDescription}</span>
+                <div className="counter mt-2  w-[100px] justify-between rounded-md flex items-center">
+                  <span className="text-[#1B4B66]">
+                    {' '}
+                    {item.quantity} x ${item.price}
+                  </span>
+                </div>
               </div>
             </div>
+            <div className="right flex flex-col justify-between items-end">
+              <button onClick={handleRemove} className="cursor-pointer">
+                <AiOutlineClose size={20} color='red'/>
+              </button>
+              <span className="text-[#1B4B66] font-semibold">
+                ${item.price * item.quantity}
+              </span>
+            </div>
           </div>
-          <div className="right flex flex-col justify-between items-end">
-            <button
-              onClick={handleRemove}
-              className="cursor-pointer"
-            >
-              <AiOutlineClose />
-            </button>
-            <span className="text-[#1B4B66] font-semibold">
-              ${item.price * item.quantity}
-            </span>
-          </div>
-        </div>
-      ))}
+        ))
+      )}
 
       <hr />
 
@@ -120,18 +125,23 @@ console.log(!open)
           </button>
         </div>
         <Link to={'/mycart'}>
-          <button className="w-full text-center mt-4  py-2 bg-[#1B4B66] text-[#fff] rounded-md" onClick={handleCartTimeOut} >
+          <button
+            className="w-full text-center mt-4  py-2 bg-[#1B4B66] text-[#fff] rounded-md"
+            onClick={handleCartTimeOut}
+          >
             Place Order
           </button>
         </Link>
 
         <Link to={'/categories/1'}>
-          <button className="w-full text-center mt-5 text-[14px]  text-[#1B4B66] underline rounded-md" onClick={handleCartTimeOut}>
+          <button
+            className="w-full text-center mt-5 text-[14px]  text-[#1B4B66] underline rounded-md"
+            onClick={handleCartTimeOut}
+          >
             Continue Shopping
           </button>
         </Link>
       </div>
-     
     </div>
   );
 };

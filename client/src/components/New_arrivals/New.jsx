@@ -37,7 +37,7 @@ const New = () => {
           ? 'Loading Data...'
           : filterProducts.map((item) => (
               <div key={item.id}>
-                <Card item={item} />
+                <Card item={item}  />
               </div>
             ))}
       </div>

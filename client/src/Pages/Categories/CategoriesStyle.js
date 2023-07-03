@@ -10,7 +10,7 @@ const catStyle = {
 
     // bottom styling 
 
-    bottom: `flex gap-x-10 py-20` ,
+    bottom: `flex gap-x-10 items-baseline py-5` ,
     left:`flex-[1] sticky top-5 h-[100%]`,
     right: `flex-[3]`,
     tabs : `

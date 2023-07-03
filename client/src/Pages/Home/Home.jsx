@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 import homeStyle from './HomeStyle'
 import { Link } from 'react-router-dom'
@@ -12,16 +12,22 @@ import Banner from '../../components/Banner/Banner'
 const Home = () => {
   return (
     <div>
-       <div className={homeStyle.bottom}>
-        <h1>We are currently experiencing local customs clearance delays. For the latest updates, please check your order status <Link to='/' className='text-blue-700 underline'>here</Link> </h1>
+      <div className={homeStyle.bottom}>
+        <h1>
+          We are currently experiencing local customs clearance delays. For the
+          latest updates, please check your order status{' '}
+          <Link to="/" className="text-blue-700 underline">
+            here
+          </Link>{' '}
+        </h1>
       </div>
-      <Hero/>
-      <New/>
-      <Collection/>
-      <Brands/>
-      <Banner/>
+      <Hero />
+      <New  />
+      <Collection />
+      <Brands />
+      <Banner />
     </div>
-  )
+  );
 }
 
 export default Home

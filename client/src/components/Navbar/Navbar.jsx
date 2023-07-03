@@ -8,12 +8,10 @@ import { Link } from 'react-router-dom';
 import navStyle from './NavbarStyle';
 import Cart from '../Cart/Cart';
 import Wishlist from '../Wishlist/Wishlist';
-import { useState  } from 'react';
+import { useState } from 'react';
 import useFetch from '../../hooks/usefetch';
 import { useSelector } from 'react-redux';
 import Search from '../Search/Search';
-
-
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -24,21 +22,19 @@ const Navbar = () => {
   const [openWishList, setOpenWishlist] = useState(false);
   const handleWishOpen = () => {
     setOpenWishlist(!openWishList);
-    
   };
- const [openSearch, setOpenSearch] = useState(false);
- 
- const handleOpen = () => {
-   setOpenSearch(true)
- }
+  const [openSearch, setOpenSearch] = useState(false);
 
- const handleBlur = () => {
-  setTimeout(() => {
-     setOpenSearch(false)
-     setSearch('')
-  } , 200)
- 
- }
+  const handleOpen = () => {
+    setOpenSearch(true);
+  };
+
+  const handleBlur = () => {
+    setTimeout(() => {
+      setOpenSearch(false);
+      setSearch('');
+    }, 200);
+  };
 
   const { data, loading, error } = useFetch(`/categories?field=title`);
 
@@ -50,13 +46,10 @@ const Navbar = () => {
   const [search, setSearch] = useState('');
 
   const handleChange = (e) => {
-    setSearch(e.target.value)
-    
-  }
+    setSearch(e.target.value);
+  };
 
-
-
-  console.log(search)
+  console.log(search);
   return (
     <>
       <div className={navStyle.nav}>
@@ -85,7 +78,7 @@ const Navbar = () => {
           </div>
         </div>
         <div className={navStyle.right}>
-          <form >
+          <form>
             <div className={navStyle.inputField}>
               <AiOutlineSearch
                 size={24}
@@ -96,7 +89,7 @@ const Navbar = () => {
                 className={navStyle.input}
                 type="text"
                 placeholder="Search for products or brands..."
-               value={search}
+                value={search}
                 name="search"
                 onChange={handleChange}
                 autoComplete="off"
@@ -136,15 +129,14 @@ const Navbar = () => {
       </div>
 
       {open && <Cart open={open} setOpen={setOpen} />}
-      {openWishList && <Wishlist  openWishlist={openWishList}  setOpenWishlist={setOpenWishlist} />}
-
-      {openSearch && (
-        <Search
-          search={search}
-          setSearch={setSearch}
-          
+      {openWishList && (
+        <Wishlist
+          openWishlist={openWishList}
+          setOpenWishlist={setOpenWishlist}
         />
       )}
+
+      {openSearch && <Search search={search} setSearch={setSearch} />}
     </>
   );
 };

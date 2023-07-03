@@ -4,7 +4,7 @@ import {
   Outlet,
   useLocation,
 } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 //importing components
@@ -19,6 +19,10 @@ import Footer from './components/Footer/Footer';
 import MyCart from './Pages/My_cart/MyCart';
 
 function App() {
+
+  
+
+
   const Layout = () => {
     return (
       <div className="app">
@@ -53,7 +57,7 @@ function App() {
       children: [
         {
           path: '/',
-          element: <Home />,
+          element: <Home  />,
         },
         {
           path: '/categories/:id',
@@ -66,7 +70,8 @@ function App() {
         {
           path: '/mycart',
           element: <MyCart />,
-        },{
+        },
+        {
           path: '/checkout/information',
           element: <CheckoutInfo />,
         },
