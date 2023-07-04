@@ -1,33 +1,24 @@
-import React from 'react'
-  import { IoIosArrowForward } from 'react-icons/io';
-  import { Link } from 'react-router-dom'
-import useFetch from '../../hooks/usefetch';
+import { IoIosArrowForward } from 'react-icons/io';
+import { Link } from 'react-router-dom';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { removeItem } from '../../redux/cartReducer';
+
+
 const MyCart = () => {
-
-  const {data} = useFetch(
-    `/products?populate=*`
-  )
-
-  const products = useSelector(state=>state.cart.products)
   
-  const dispatch = useDispatch()
- 
+  const products = useSelector((state) => state.cart.products);
+
+  const dispatch = useDispatch();
+
   const totalPrice = () => {
     let total = 0;
     const taxPercentage = Math.random() * 0.1 + 0.1;
     const taxAmount = total * taxPercentage.toFixed(2);
-
     products.forEach((item) => (total += item.quantity * item.price));
-
     const totalPrice = total + taxAmount;
-
     return totalPrice.toFixed(2);
   };
-
- 
-
 
   return (
     <div className="px-8 pb-10">
@@ -45,10 +36,10 @@ const MyCart = () => {
           <h1>My Cart</h1>
         </div>
       </div>
-      <div className="content flex items-baseline gap-16">
+      <div className="content flex items-start gap-16">
         <div className="left flex-[1]">
           <table className="w-full text-left border-collapse">
-            <thead className='border-b'>
+            <thead className="border-b">
               <tr>
                 <th>Product Name</th>
                 <th>Price</th>
@@ -58,47 +49,53 @@ const MyCart = () => {
               </tr>
             </thead>
 
-            {products.map((item) => (
-              <tbody key={item.id} className='w-full'>
-                <tr>
-                  <td>
-                    <div className="my-10 flex justify-between w-[70%]">
-                      <div className="left flex gap-x-5">
-                        <img
-                          className="w-[100px] object-contain"
-                          src={'http://localhost:1338' + item.image}
-                        />
-                        <div className="">
-                          <h1 className="font-semibold text-[#1B4B66] mb-2">
-                            {item.name}
-                          </h1>
-                          <span className="text-[#626262]">
-                            {item.subDescription}
-                          </span>
-                          <div className="counter mt-2  w-[100px] justify-between rounded-md flex items-center">
-                            <span className="text-[#1B4B66]">
-                              {' '}
-                              Qty - {item.quantity}
+            {products.length === 0 ? (
+              <span className="text-center flex justify-center items-center mt-10 mb-10 text-[18px] opacity-[.3] font-semibold">
+                Your Cartlist is empty
+              </span>
+            ) : (
+              products.map((item) => (
+                <tbody key={item.id} className="w-full">
+                  <tr>
+                    <td>
+                      <div className="my-10 flex justify-between w-[70%]">
+                        <div className="left flex gap-x-5">
+                          <img
+                            className="w-[100px] object-contain"
+                            src={'http://localhost:1338' + item.image}
+                          />
+                          <div className="">
+                            <h1 className="font-semibold text-[#1B4B66] mb-2">
+                              {item.name}
+                            </h1>
+                            <span className="text-[#626262]">
+                              {item.subDescription}
                             </span>
-                          </div>
-                          <div className="buttons mt-5 flex gap-6 font-semibold text-[14px]">
-                            <button
-                              className="text-red-500 underline"
-                              onClick={() => dispatch(removeItem(item.id))}
-                            >
-                              Remove
-                            </button>
+                            <div className="counter mt-2  w-[100px] justify-between rounded-md flex items-center">
+                              <span className="text-[#1B4B66]">
+                                {' '}
+                                Qty - {item.quantity}
+                              </span>
+                            </div>
+                            <div className="buttons mt-5 flex gap-6 font-semibold text-[14px]">
+                              <button
+                                className="text-red-500 underline"
+                                onClick={() => dispatch(removeItem(item.id))}
+                              >
+                                Remove
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </td>
-                  <td> ${item.price}</td>
-                  <td>{item.quantity}</td>
-                  <td>${item.quantity * item.price} </td>
-                </tr>
-              </tbody>
-            ))}
+                    </td>
+                    <td> ${item.price}</td>
+                    <td>{item.quantity}</td>
+                    <td>${item.quantity * item.price} </td>
+                  </tr>
+                </tbody>
+              ))
+            )}
           </table>
           <div className="accordion mt-10">
             <h1 className="mb-3 text-[#1B4B66] font-semibold">
@@ -137,17 +134,22 @@ const MyCart = () => {
             </div>
           </div>
           <div className="button flex justify-between text-white gap-x-5">
-            <button className="bg-[#1B4B66] w-[40%] rounded-md py-2">
-              Place Order
-            </button>
-            <button className="border-2 border-[#1B4B66] text-[#1B4B66] w-[40%] rounded-md">
-              Continue Shopping
-            </button>
+            <Link className="w-[40%]" to={`/checkout/information`}>
+              <button className="bg-[#1B4B66] w-[100%] rounded-md py-2">
+                Place Order
+              </button>
+            </Link>
+
+            <Link className="w-[40%]" to={'/categories/1'}>
+              <button className="border-2 border-[#1B4B66] text-[#1B4B66] w-[100%] py-2 rounded-md">
+                Continue Shopping
+              </button>
+            </Link>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default MyCart
+export default MyCart;

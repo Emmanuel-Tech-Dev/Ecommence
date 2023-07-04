@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // import React, { useState , useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai'
@@ -87,7 +88,7 @@ console.log(!open)
             </div>
             <div className="right flex flex-col justify-between items-end">
               <button onClick={handleRemove} className="cursor-pointer">
-                <AiOutlineClose size={20} color='red'/>
+                <AiOutlineClose size={20} color="red" />
               </button>
               <span className="text-[#1B4B66] font-semibold">
                 ${item.price * item.quantity}
@@ -124,7 +125,7 @@ console.log(!open)
             Check
           </button>
         </div>
-        <Link to={'/mycart'}>
+        <Link to={'/checkout/information'}>
           <button
             className="w-full text-center mt-4  py-2 bg-[#1B4B66] text-[#fff] rounded-md"
             onClick={handleCartTimeOut}
