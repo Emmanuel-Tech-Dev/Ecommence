@@ -9,6 +9,9 @@ This is an e-commerce website built using React, Tailwind CSS, and Strapi as a C
 - Search Products
 - Toaster notification
 - Cart page
+- Checkout page
+- order list
+- payment
 
 ## Features not Implemented
 
@@ -16,10 +19,6 @@ This is an e-commerce website built using React, Tailwind CSS, and Strapi as a C
 - User registration and authentication functionality.
 - filter by size , color , price, discount , availability 
 - Ratings from user 
-- Checkout
-- checkout page
-- order list
-- payment
 - Integration with a secure payment gateway (Stripe or Paystack).
 - Order tracking and history for customers.
 
