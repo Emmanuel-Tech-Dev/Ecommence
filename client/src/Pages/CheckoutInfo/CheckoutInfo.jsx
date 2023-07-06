@@ -24,7 +24,7 @@ const CheckoutInfo = () => {
 
 
   return (
-    <div className="px-8 pb-10">
+    <div className="px-2 md:px-8 pb-10">
       <div className="heading mt-16 mb-10">
         <div className="cramps flex items-center gap-x-2 text-[14px] font-meduim ">
           <Link to={'/'}>
@@ -40,9 +40,9 @@ const CheckoutInfo = () => {
         </div>
       </div>
 
-      <div className="content flex items-start gap-x-16">
-        <div className="left flex-[3] ">
-         <form className='w-[70%]'>
+      <div className="content flex flex-col  items-start gap-x-16 md:flex-row">
+        <div className="left w-full flex-[1] md:flex-[3] ">
+         <form className='w-[100%] md:w-[70%]'>
           <AccDIon />
          
           <AccDionTwo />
@@ -63,14 +63,14 @@ const CheckoutInfo = () => {
           
          
         </div>
-        <div className="right flex-[1]">
-          <div className="right flex-[1] sticky top-5 h-full">
+        <div className="right flex-[1] w-full mt-24 md:mt-0">
+          <div className="right flex-[1] md:sticky md:top-5 md:h-full">
             <h1 className="mb-1 text-[24px] font-semibold text-[#1B4B66]">
               Order Summary
             </h1>
             <hr />
 
-            <div className="my-10 flex flex-col justify-between w-[70%]">
+            <div className="my-10 flex flex-col justify-between w-[100%]">
              
               {products.map((item) => (
                 <div key={item.id} className="left flex gap-x-5 my-3">
@@ -103,7 +103,7 @@ const CheckoutInfo = () => {
                 </div>
               ))}
 
-              <div className="total mt-10  ">
+              <div className="total mt-10 w-full ">
                 <h1 className="mb-1 text-[24px] font-semibold text-[#1B4B66]">
                   Order Details
                 </h1>

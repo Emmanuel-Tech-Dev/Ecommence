@@ -14,7 +14,7 @@ const Card_T = ({item}) => {
             // eslint-disable-next-line react/prop-types
             item?.attributes?.image?.data?.attributes?.url
           }
-          className={cardStyle.img}
+          className={cardStyle.img2}
         />
         <div className={cardStyle.bg}>
           <h1 className={cardStyle.h1}>

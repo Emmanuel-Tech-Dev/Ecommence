@@ -21,7 +21,7 @@ const MyCart = () => {
   };
 
   return (
-    <div className="px-8 pb-10">
+    <div className="px-2 md:px-8 pb-10">
       <div className="heading mt-16 mb-10">
         <div className="cramps flex items-center gap-x-2 text-[14px] font-meduim ">
           <Link to={'/'}>
@@ -36,15 +36,15 @@ const MyCart = () => {
           <h1>My Cart</h1>
         </div>
       </div>
-      <div className="content flex items-start gap-16">
-        <div className="left flex-[1]">
-          <table className="w-full text-left border-collapse">
+      <div className="content flex flex-col  items-start gap-16 md:flex-row">
+        <div className="left w-full flex-[1]">
+          <table className=" text-left ">
             <thead className="border-b">
               <tr>
                 <th>Product Name</th>
-                <th>Price</th>
-                <th>Qty</th>
-                <th>Subtotal</th>
+                <th >Price</th>
+                <th >Qty</th>
+                <th >Subtotal</th>
                 <hr />
               </tr>
             </thead>
@@ -55,7 +55,7 @@ const MyCart = () => {
               </span>
             ) : (
               products.map((item) => (
-                <tbody key={item.id} className="w-full">
+                <tbody key={item.id}>
                   <tr>
                     <td>
                       <div className="my-10 flex justify-between w-[70%]">
@@ -89,9 +89,9 @@ const MyCart = () => {
                         </div>
                       </div>
                     </td>
-                    <td> ${item.price}</td>
-                    <td>{item.quantity}</td>
-                    <td>${item.quantity * item.price} </td>
+                    <td className='text-center'> ${item.price}</td>
+                    <td className='text-center'>{item.quantity}</td>
+                    <td className='text-center'>${item.quantity * item.price} </td>
                   </tr>
                 </tbody>
               ))
@@ -102,7 +102,7 @@ const MyCart = () => {
               Apply Coupon Code
             </h1>
             <hr className="w-[83%]" />
-            <div className="coupon mt-5 bg-[#F1F1F1] w-[50%] flex justify-between py-3 px-4 flex-[2] rounded-md">
+            <div className="coupon mt-5 bg-[#F1F1F1] md:w-[50%] flex justify-between py-3 px-4 flex-[2] rounded-md">
               <input
                 type="text"
                 placeholder="Apply Valid Pincode"
@@ -114,7 +114,7 @@ const MyCart = () => {
             </div>
           </div>
         </div>
-        <div className="right flex-[1] sticky top-5 h-full">
+        <div className="right w-full flex-[1] md:sticky md:top-5 md:h-full">
           <h1 className="mb-1 text-[24px] font-semibold text-[#1B4B66]">
             Order Summary
           </h1>
@@ -133,14 +133,14 @@ const MyCart = () => {
               <span>${totalPrice()}</span>
             </div>
           </div>
-          <div className="button flex justify-between text-white gap-x-5">
-            <Link className="w-[40%]" to={`/checkout/information`}>
+          <div className="button flex flex-col justify-between text-white gap-5 md:gap-x-5 md:flex-row">
+            <Link className="md:w-[40%]" to={`/checkout/information`}>
               <button className="bg-[#1B4B66] w-[100%] rounded-md py-2">
                 Place Order
               </button>
             </Link>
 
-            <Link className="w-[40%]" to={'/categories/1'}>
+            <Link className="md:w-[40%]" to={'/categories/1'}>
               <button className="border-2 border-[#1B4B66] text-[#1B4B66] w-[100%] py-2 rounded-md">
                 Continue Shopping
               </button>

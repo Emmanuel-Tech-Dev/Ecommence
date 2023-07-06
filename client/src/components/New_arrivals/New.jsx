@@ -2,11 +2,50 @@ import { IoIosArrowForward } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import Card from '../Cards/Card';
 
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 //importing styles
 import newStyle from './NewStyle';
 import useFetch from '../../hooks/usefetch';
 
 const New = () => {
+  const settings = {
+  
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+         
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1.57,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
   const { data, loading, error } = useFetch(`/products?_limit=4&populate=*`);
 
   const filterProducts = data
@@ -30,16 +69,18 @@ const New = () => {
         </Link>
       </div>
 
-      <div className="card-section flex justify-between items-center px-8 py-6">
-        {error
-          ? 'Something went wrong '
-          : loading
-          ? 'Loading Data...'
-          : filterProducts.map((item) => (
-              <div key={item.id}>
-                <Card item={item}  />
-              </div>
+      <div className="px-2 md:px-8">
+        {loading ? (
+          'Loading Data...'
+        ) : error ? (
+          'Something went wrong'
+        ) : (
+          <Slider {...settings}>
+            {filterProducts.map((item) => (
+              <Card item={item} key={item.id} />
             ))}
+          </Slider>
+        )}
       </div>
     </div>
   );

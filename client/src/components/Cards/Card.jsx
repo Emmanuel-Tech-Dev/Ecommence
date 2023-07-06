@@ -75,7 +75,8 @@ const Card = ({item}) => {
 
   return (
     <div className={cardStyle.card}>
-      <Link to={`/product/${item.id}`}>
+    <div className="cantainer px-2">
+       <Link to={`/product/${item.id}`}>
         <img
           src={
             'http://localhost:1338' +
@@ -105,8 +106,8 @@ const Card = ({item}) => {
         </div>
         <p></p>
         <div className={cardStyle.ratings}>
-          <img className="w-[100px] h-[20px]" src="../images/star.png" alt="" />
-          <span className="font-semibold">54 ratings</span>
+          <img className="h-[15px] md:w-[100px] md:h-[20px]" src="../images/star.png" alt="" />
+          <span className="font-semibold text-[14px] md:text-[16px]">54 ratings</span>
         </div>
         <div className={cardStyle.price}>
           <span className={cardStyle.newPrice}>${discountPrice}</span>{' '}
@@ -116,6 +117,8 @@ const Card = ({item}) => {
           </span>
         </div>
       </div>
+    </div>
+     
     </div>
   );
 }

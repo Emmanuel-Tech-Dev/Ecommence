@@ -14,12 +14,7 @@
 body{
   font-family: 'Inter', sans-serif;
 }
-
-input[type="radio"]:checked {
-  border-color: #1B4B66;
-  background-color: green;
-}
-
-input[type="radio"]:focus {
-  outline:none;
+.slick-arrow
+ {
+  display: none !important;
 }

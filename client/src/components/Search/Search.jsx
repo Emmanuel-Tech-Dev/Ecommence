@@ -12,7 +12,7 @@ const Search = ({search , setSearch , onClick}) => {
 
   return (
     <div
-      className="absolute right-[11%] z-[999] h-[500px] overflow-y-scroll bg-[#fff] px-5 py-3 shadow rounded w-[25%] "
+      className="absolute w-full md:right-[11%] z-[999] h-[500px] overflow-y-scroll bg-[#fff] px-5 py-3 shadow rounded md:w-[25%] "
       onClick={onClick}
     >
       <h className="opacity-[.5]">Recent searched items ...</h>

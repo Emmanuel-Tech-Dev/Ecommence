@@ -1,13 +1,17 @@
 const productStyle = {
 
    container : `
-         px-8 
+         md:px-8 
+         px-2
    ` , 
 
    content : `
         flex
-        gap-x-10
+        flex-col
+        gap-10
         mt-10
+        md:flex-row
+
    ` , 
 
    left : `
@@ -18,7 +22,9 @@ const productStyle = {
      flex
      justify-center
      items-center
-     gap-x-10
+     gap-x-5
+     md:gap-x-10
+
      my-5
 
    ` ,

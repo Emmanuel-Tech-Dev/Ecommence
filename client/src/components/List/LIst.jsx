@@ -35,7 +35,7 @@ const List = ({ cateId  }) => {
         </div>
 
         <div className={catStyle.rightSm}>
-          <div className="count flex items-center gap-x-3">
+          <div className="count flex md:items-center gap-x-3">
             <h1>To show:</h1>
             <span className="bg-[#F1F1F1] px-4 py-2 rounded">
               {data.length}

@@ -9,8 +9,48 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../../redux/cartReducer';
 import { addToWishlist } from '../../redux/wishlistReducer';
 
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const Product = () => {
+
+  const settings = {
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1.57,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
+
+
+
   const id = useParams().id;
 
   const [selectedImg, setSelectedImg] = useState('image');
@@ -71,7 +111,7 @@ const Product = () => {
       <div className={productStyle.content}>
         <div className={productStyle.left}>
           <img
-            className="w-[100%] h-[600px] rounded-[16px]"
+            className="w-[100%] md:h-[600px] rounded-[16px]"
             src={
               'http://localhost:1338' +
               data?.attributes?.[selectedImg]?.data[0]?.attributes?.url
@@ -79,7 +119,7 @@ const Product = () => {
           />
           <div className={productStyle.thumnails}>
             <img
-              className="w-[80px] rounded-md"
+              className="w-[60px] md:w-[80px] rounded-md"
               src={
                 'http://localhost:1338' +
                 data?.attributes?.image?.data[0]?.attributes?.url
@@ -87,7 +127,7 @@ const Product = () => {
               onClick={() => setSelectedImg('image')}
             />
             <img
-              className="w-[80px] rounded-md"
+              className="w-[60px] md:w-[80px] rounded-md"
               src={
                 'http://localhost:1338' +
                 data?.attributes?.image?.data[0]?.attributes?.url
@@ -95,7 +135,7 @@ const Product = () => {
               onClick={() => setSelectedImg('image')}
             />
             <img
-              className="w-[80px] rounded-md"
+              className="w-[60px] md:w-[80px] rounded-md"
               src={
                 'http://localhost:1338' +
                 data?.attributes?.image?.data[0]?.attributes?.url
@@ -103,7 +143,7 @@ const Product = () => {
               onClick={() => setSelectedImg('image')}
             />
             <img
-              className="w-[80px] rounded-md"
+              className="w-[60px] md:w-[80px] rounded-md"
               src={
                 'http://localhost:1338' +
                 data?.attributes?.image?.data[0]?.attributes?.url
@@ -120,7 +160,7 @@ const Product = () => {
             {data?.attributes?.subDescription}
           </h5>
           <div className="raitngs flex items-center gap-x-5 my-3">
-            <img src="../../images/star.png" />
+            <img src="../../images/star.png" className="w-[100px] " />
             <span className="text-[#B6B6B6]">(250) Ratings</span>
           </div>
 
@@ -133,9 +173,9 @@ const Product = () => {
           </div>
           <hr />
 
-          <div className="details mt-6 flex items-center gap-x-10">
+          <div className="details  mt-6 flex flex-col md:items-center gap-4 md:flex-row md:gap-x-10">
             <div className="content flex-[1]">
-              <h1 className="text-[20px] font-semibold mb-2">
+              <h1 className="text-[20px] font-semibold md:mb-2">
                 Delivery Details
               </h1>
               <p>Check estimated delivery date/pickup option.</p>
@@ -173,7 +213,7 @@ const Product = () => {
             </div>
           </div>
 
-          <div className="discount border   border-[#1B4B66] py-2 px-4 w-[60%] flex items-center gap-x-5 rounded-md">
+          <div className="discount border   border-[#1B4B66] py-2 px-4 md:w-[60%] flex items-center gap-x-5 rounded-md">
             <div className="content mb-2">
               <h1 className="font-semibold mb-2">
                 Get upto 30% Off on order value above $100
@@ -188,9 +228,9 @@ const Product = () => {
             </div>
           </div>
 
-          <div className="buttons mt-10 flex items-center gap-x-5 ">
+          <div className="buttons mt-10 flex flex-col md:items-center gap-5 md:gap-x-5 md:flex-row">
             <button
-              className="flex items-center gap-x-5 px-20 py-2 bg-[#1B4B66] text-[#fff] rounded-md"
+              className="flex items-center justify-center gap-x-5 px-20 py-2 bg-[#1B4B66] text-[#fff] rounded-md"
               onClick={() =>
                 dispatch(
                   addToCart({
@@ -207,7 +247,7 @@ const Product = () => {
               <AiOutlineShopping size={24} /> Add To Bag
             </button>
             <button
-              className="flex items-center gap-x-5 px-10 py-2 border-2 border-[#1B4B66] text-[#1B4B66] rounded-md"
+              className="flex items-center justify-center gap-x-5 px-10 py-2 border-2 border-[#1B4B66] text-[#1B4B66] rounded-md"
               onClick={() =>
                 dispatch(
                   addToWishlist({
@@ -228,7 +268,7 @@ const Product = () => {
 
       <div className="desc my-16">
         <div className="container">
-          <div className="buttons w-full bg-[#f1f1f1] py-2 px-5 rounded-[12px] flex items-center gap-x-10">
+          <div className="buttons w-full bg-[#f1f1f1] py-2 px-2 md:px-5 rounded-[12px] flex items-center gap-x-10">
             <button
               className={`${
                 activeButton === 'description'
@@ -267,12 +307,15 @@ const Product = () => {
           )}
 
           {activeButton === 'relatedProducts' && (
-            <div className="content my-10 text-[#626262] flex flex-wrap justify-between gap-x-20">
-              {filterProducts.map((item) => (
+            <div className="content my-10 text-[#626262]">
+              <Slider {...settings}>
+                {filterProducts.map((item) => (
                 <div className="div" key={item.id}>
                   <Card item={item} />
                 </div>
-              ))}
+              ))} 
+              </Slider>
+             
             </div>
           )}
         </div>

@@ -47,13 +47,13 @@ const AccDionTwo = () => {
           <div
             className={`px-4 py-2 max-h-full opacity-100 transition-all duration-300 overflow-hidden`}
           >
-            <div className="card flex justify-between mt-4">
+            <div className="card flex flex-col gap-5 justify-between mt-4 md:flex-row">
               <label
                 htmlFor="radio-1"
                 className={
                   !isCheck.radio1
-                    ? '  border border-gray-100 w-[130px] h-[120px] p-2 rounded hover:bg-[#1B4B6605] transition-all duration-300 ease-in-out'
-                    : 'bg-[#1B4B6611]  border border-gray-100 w-[130px] h-[120px] p-2 rounded '
+                    ? '  border border-gray-100 md:w-[130px] h-[120px] p-2 rounded hover:bg-[#1B4B6605] transition-all duration-300 ease-in-out'
+                    : 'bg-[#1B4B6611]  border border-gray-100 md:w-[130px] h-[120px] p-2 rounded '
                 }
               >
                 <input
@@ -76,8 +76,8 @@ const AccDionTwo = () => {
                 htmlFor="radio-2"
                 className={
                   !isCheck.radio2
-                    ? '  border border-gray-100 w-[130px] h-[120px] p-2 rounded hover:bg-[#1B4B6605] transition-all duration-300 ease-in-out'
-                    : 'bg-[#1B4B6611]  border border-gray-100 w-[130px] h-[120px] p-2 rounded '
+                    ? '  border border-gray-100 md:w-[130px] h-[120px] p-2 rounded hover:bg-[#1B4B6605] transition-all duration-300 ease-in-out'
+                    : 'bg-[#1B4B6611]  border border-gray-100 md:w-[130px] h-[120px] p-2 rounded '
                 }
               >
                 {' '}
@@ -102,8 +102,8 @@ const AccDionTwo = () => {
                 htmlFor="radio-3"
                 className={
                   !isCheck.radio3
-                    ? '  border border-gray-100 w-[130px] h-[120px] p-2 rounded hover:bg-[#1B4B6605] transition-all duration-300 ease-in-out'
-                    : 'bg-[#1B4B6611]  border border-gray-100 w-[130px] h-[120px] p-2 rounded '
+                    ? '  border border-gray-100 md:w-[130px] h-[120px] p-2 rounded hover:bg-[#1B4B6605] transition-all duration-300 ease-in-out'
+                    : 'bg-[#1B4B6611]  border border-gray-100 md:w-[130px] h-[120px] p-2 rounded '
                 }
               >
                 <input
@@ -127,8 +127,8 @@ const AccDionTwo = () => {
                 htmlFor="radio-4"
                 className={
                   !isCheck.radio4
-                    ? '  border border-gray-100 w-[130px] h-[120px] p-2 rounded hover:bg-[#1B4B6605] transition-all duration-300 ease-in-out'
-                    : 'bg-[#1B4B6611]  border border-gray-100 w-[130px] h-[120px] p-2 rounded '
+                    ? '  border border-gray-100 md:w-[130px] h-[120px] p-2 rounded hover:bg-[#1B4B6605] transition-all duration-300 ease-in-out'
+                    : 'bg-[#1B4B6611]  border border-gray-100 md:w-[130px] h-[120px] p-2 rounded '
                 }
               >
                 <input

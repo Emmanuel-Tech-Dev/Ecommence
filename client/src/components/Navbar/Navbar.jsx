@@ -3,6 +3,8 @@ import {
   AiOutlineShopping,
   AiOutlineUser,
   AiOutlineSearch,
+  AiOutlineMenu,
+  AiOutlineClose,
 } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import navStyle from './NavbarStyle';
@@ -18,6 +20,15 @@ const Navbar = () => {
   const handleCartOpen = () => {
     setOpen(!open);
   };
+
+  const [openNav , setOpenNav] = useState(false)
+
+  const handleNav = () =>{
+    setOpenNav(!openNav)
+
+    console.log('click')
+  }
+
 
   const [openWishList, setOpenWishlist] = useState(false);
   const handleWishOpen = () => {
@@ -123,6 +134,97 @@ const Navbar = () => {
                 onClick={handleCartOpen}
               />
               <span className={navStyle.count}>{products.length}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* mobile nav */}
+      <div className={navStyle.navM}>
+        <div className={navStyle.leftM}>
+          <div className="top flex justify-between items-center">
+            <Link to={'/'}>
+              <label className={navStyle.logo}>
+                <img src="../images/logo.png" />
+              </label>
+            </Link>
+            <button
+              onClick={handleNav}
+              className="transition-transform duration-300 ease-in-out  "
+            >
+              {!openNav ? (
+                <AiOutlineMenu size={24} />
+              ) : (
+                <AiOutlineClose size={24} />
+              )}
+            </button>
+          </div>
+
+          <div
+            className={!openNav ? navStyle.navlinksM : navStyle.navlinksOpen}
+          >
+            {/* Mapping over link items */}
+            {error
+              ? 'Something went wrong'
+              : loading
+              ? 'Loading Data...'
+              : data.map((item) => (
+                  <div key={item.id}>
+                    <Link to={`/categories/${item.id}`}>
+                      <li className={navStyle.liM}>
+                        {item?.attributes?.title.replace(/_/g, ' ')}
+                      </li>
+                    </Link>
+                  </div>
+                ))}
+          </div>
+        </div>
+        <div className={navStyle.rightM}>
+          <form>
+            <div className={navStyle.inputFieldM}>
+              <AiOutlineSearch
+                size={24}
+                color="#13101E"
+                className="cursor-pointer"
+              />
+              <input
+                className={navStyle.inputM}
+                type="text"
+                placeholder="Search for products or brands..."
+                value={search}
+                name="search"
+                onChange={handleChange}
+                autoComplete="off"
+                onFocus={handleOpen}
+                onBlur={handleBlur}
+              />
+            </div>
+          </form>
+
+          <div className={navStyle.iconsM}>
+            <div className={navStyle.cartM}>
+              <AiOutlineHeart
+                size={24}
+                color="#13101E"
+                onClick={handleWishOpen}
+                className="cursor-pointer"
+              />
+              <span className={navStyle.count}>{wish.length}</span>
+            </div>
+
+            <AiOutlineUser
+              size={24}
+              color="#13101E"
+              className="cursor-pointer"
+            />
+            <div className={navStyle.cartM}>
+              <AiOutlineShopping
+                size={24}
+                color="#13101E"
+                className="cursor-pointer"
+                onClick={handleCartOpen}
+              />
+              <span className={navStyle.countM}>{products.length}</span>
             </div>
           </div>
         </div>

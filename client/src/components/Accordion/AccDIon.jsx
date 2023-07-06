@@ -9,9 +9,9 @@ const AccDIon = () => {
   };
 
   return (
-    <div>
-      <div className="accordion">
-        <div className={accordStyle.toggler} onClick={toggleAccordion}>
+    <div className=''>
+      <div className="accordion ">
+        <div className={accordStyle.toggler } onClick={toggleAccordion}>
           <h3 className="text-lg font-semibold text-[#1B4B66]">
             Contact Information
           </h3>

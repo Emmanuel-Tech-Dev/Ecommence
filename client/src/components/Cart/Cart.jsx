@@ -51,7 +51,7 @@ const handleCartTimeOut = () => {
 console.log(!open)
 
   return (
-    <div className=" absolute z-[9999] right-8 bg-[#fff] px-5 py-3 shadow rounded w-[25%] ">
+    <div className=" absolute z-[9999] w-full  md:right-8 bg-[#fff] px-5 py-3 shadow rounded md:w-[25%] ">
       <div className="top font-semibold text-[#1B4B66] flex items-center justify-between">
         <button onClick={handleCart}>Back</button>
         <Link to={`/mycart`}>

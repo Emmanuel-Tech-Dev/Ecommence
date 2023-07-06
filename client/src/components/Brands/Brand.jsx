@@ -32,7 +32,7 @@ const Brand = () => {
     <div className='py-12'>
         <h1 className={brandStyle.h1}>Shop By Brands</h1>
     
-      <div className="wrapper flex justify-between items-center">
+      <div className="wrapper flex flex-wrap justify-between items-center">
         {data.map((item) => (
         <div key={item.id}>
            <BrandCard item={item}/>
