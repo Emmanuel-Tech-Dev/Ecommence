@@ -75,7 +75,7 @@ const Card = ({item}) => {
 
   return (
     <div className={cardStyle.card}>
-    <div className="cantainer px-2">
+    <div className="cantainer px-2 md:w-full">
        <Link to={`/product/${item.id}`}>
         <img
           src={

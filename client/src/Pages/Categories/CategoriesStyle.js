@@ -11,31 +11,37 @@ const catStyle = {
 
   bottom: `w-full flex justify-between gap-x-10 items-baseline py-5`,
   left: ` hidden md:flex-[1] sticky md:top-5 h-[100%] md:block`,
-  right: `w-full bg-red-500 md:flex-[3]`,
+  right: `w-full md:flex-[3]`,
   tabs: `
          flex 
          justify-between
          items-center  
-         mb-8
+         my-8
+         md:mb-8
+         mb:my-0
          sticky 
          top-0
          md:h-[2%]
          bg-[#fff]
          md:py-10
          py-3
-         bg-blue-400
+         
     `,
 
   leftSm: `
            flex 
-           gap-x-5
+           gap-x-2
+           md:gap-x-5
+           items-center
           
     `,
 
   rightSm: `
         flex
-        gap-x-56 
+        md:gap-x-56 
         items-center  
+        flex-wrap
+         justify-center
          
     `,
 
@@ -44,8 +50,8 @@ const catStyle = {
          py-2
          bg-[#F1F1F1]
          rounded
-
          focus:outline-none
+        
          `,
 };
 

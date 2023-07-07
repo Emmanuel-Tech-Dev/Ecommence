@@ -1,8 +1,11 @@
 import {
   AiOutlineHeart,
+  AiFillHeart,
   AiOutlineShopping,
+  AiFillShopping,
   AiOutlineUser,
   AiOutlineSearch,
+ 
   AiOutlineMenu,
   AiOutlineClose,
 } from 'react-icons/ai';
@@ -19,6 +22,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const handleCartOpen = () => {
     setOpen(!open);
+    setOpenWishlist(false)
   };
 
   const [openNav , setOpenNav] = useState(false)
@@ -33,11 +37,15 @@ const Navbar = () => {
   const [openWishList, setOpenWishlist] = useState(false);
   const handleWishOpen = () => {
     setOpenWishlist(!openWishList);
+    setOpen(false)
+    
   };
   const [openSearch, setOpenSearch] = useState(false);
 
   const handleOpen = () => {
     setOpenSearch(true);
+ setOpenWishlist(false);
+  setOpen(false);
   };
 
   const handleBlur = () => {
@@ -47,6 +55,15 @@ const Navbar = () => {
     }, 200);
   };
 
+ const [search, setSearch] = useState('');
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  console.log(search);
+
+
   const { data, loading, error } = useFetch(`/categories?field=title`);
 
   // Replacing - with empy spaces
@@ -54,13 +71,7 @@ const Navbar = () => {
   const wish = useSelector((state) => state.wishlist.products);
 
   //Creating a state for the search input
-  const [search, setSearch] = useState('');
-
-  const handleChange = (e) => {
-    setSearch(e.target.value);
-  };
-
-  console.log(search);
+ 
   return (
     <>
       <div className={navStyle.nav}>
@@ -203,12 +214,21 @@ const Navbar = () => {
 
           <div className={navStyle.iconsM}>
             <div className={navStyle.cartM}>
-              <AiOutlineHeart
-                size={24}
-                color="#13101E"
-                onClick={handleWishOpen}
-                className="cursor-pointer"
-              />
+              {!openWishList ? (
+                <AiOutlineHeart
+                  size={24}
+                  color="#13101E"
+                  onClick={handleWishOpen}
+                  className="cursor-pointer"
+                />
+              ) : (
+                <AiFillHeart
+                  size={24}
+                  color="#13101E"
+                  onClick={handleWishOpen}
+                  className="cursor-pointer"
+                />
+              )}
               <span className={navStyle.count}>{wish.length}</span>
             </div>
 
@@ -218,12 +238,21 @@ const Navbar = () => {
               className="cursor-pointer"
             />
             <div className={navStyle.cartM}>
-              <AiOutlineShopping
-                size={24}
-                color="#13101E"
-                className="cursor-pointer"
-                onClick={handleCartOpen}
-              />
+              {!open ? (
+                <AiOutlineShopping
+                  size={24}
+                  color="#13101E"
+                  className="cursor-pointer"
+                  onClick={handleCartOpen}
+                />
+              ) : (
+                <AiFillShopping
+                  size={24}
+                  color="#13101E"
+                  className="cursor-pointer"
+                  onClick={handleCartOpen}
+                />
+              )}
               <span className={navStyle.countM}>{products.length}</span>
             </div>
           </div>

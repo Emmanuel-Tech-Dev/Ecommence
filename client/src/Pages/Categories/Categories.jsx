@@ -49,9 +49,7 @@ const Categories = () => {
           <Accordion title="Availability" label="available" id="6" />
         </div>
         <div className={catStyle.right}>
-          <div className="">
-            <List cateId={cateId} />
-          </div>
+           <List cateId={cateId} />
         </div>
       </div>
     </div>

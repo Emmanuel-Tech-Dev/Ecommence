@@ -38,25 +38,24 @@ const Search = ({search , setSearch , onClick}) => {
                   }
                 />
                 <div className="">
-                  <h1 className="font-semibold text-[#1B4B66] mb-2">{item?.attributes?.name}</h1>
-                  <span className="text-[#626262]">Leather suiting </span>
-                  <div className="counter mt-2  w-[100px] justify-between rounded-md flex items-center">
-                    <span className="text-[#1B4B66]"> $500</span>
-                  </div>
+                  <h1 className="font-semibold text-[#1B4B66] mb-2">
+                    {item?.attributes?.name}
+                  </h1>
+                  <span className="text-[#626262]">
+                    {item?.attributes?.subDescription}
+                  </span>
+                 
                 </div>
               </div>
               <div className="right flex flex-col justify-between items-end">
-                <button className="cursor-pointer">
-                  <AiOutlineClose />
-                </button>
-                <span className="text-[#1B4B66] font-semibold">$500</span>
+                
+                <span className="text-[#1B4B66] font-semibold">{item?.attributes??.price}</span>
               </div>
             </div>
           </Link>
         ))}
       </div>
     </div>
-   
   );
 
  

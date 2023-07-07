@@ -8,7 +8,7 @@ import useFetch from '../../hooks/usefetch';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../redux/cartReducer';
 import { addToWishlist } from '../../redux/wishlistReducer';
-
+import { toast } from 'react-toastify';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -48,9 +48,6 @@ const Product = () => {
     ],
   };
 
-
-
-
   const id = useParams().id;
 
   const [selectedImg, setSelectedImg] = useState('image');
@@ -86,6 +83,59 @@ const Product = () => {
     );
 
   const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+   dispatch(
+     addToCart({
+         id: data.id,
+         name: data.attributes.name,
+         subDescription: data.attributes.subDescription,
+         price: discountPrice,
+         image: data.attributes.image.data[0].attributes.url,
+         quantity,
+       })
+     );
+
+     toast.success(data.attributes.name +' Added To Your Cart', {
+       position: 'top-center',
+       autoClose: 2000,
+       hideProgressBar: false,
+       closeOnClick: true,
+       pauseOnHover: true,
+       draggable: true,
+       progress: undefined,
+       theme: 'light',
+     });
+
+  }
+
+  const handleToWishlist = () => {
+  dispatch(
+    addToWishlist({
+      id: data.id,
+      name: data.attributes.name,
+      subDescription: data.attributes.subDescription,
+      image: data.attributes.image.data[0].attributes.url,
+      price: discountPrice,
+    })
+  );
+toast.success(data.attributes.name + ' Added To Your Wishlist', {
+  position: 'top-center',
+  autoClose: 2000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: 'light',
+});
+
+  }
+
+
+
+
+
   return (
     <div className={productStyle.container}>
       <div className="heading mt-10 mb-16">
@@ -231,33 +281,14 @@ const Product = () => {
           <div className="buttons mt-10 flex flex-col md:items-center gap-5 md:gap-x-5 md:flex-row">
             <button
               className="flex items-center justify-center gap-x-5 px-20 py-2 bg-[#1B4B66] text-[#fff] rounded-md"
-              onClick={() =>
-                dispatch(
-                  addToCart({
-                    id: data.id,
-                    name: data.attributes.name,
-                    subDescription: data.attributes.subDescription,
-                    price: discountPrice,
-                    image: data.attributes.image.data[0].attributes.url,
-                    quantity,
-                  })
-                )
+              onClick={handleAddToCart
               }
             >
               <AiOutlineShopping size={24} /> Add To Bag
             </button>
             <button
               className="flex items-center justify-center gap-x-5 px-10 py-2 border-2 border-[#1B4B66] text-[#1B4B66] rounded-md"
-              onClick={() =>
-                dispatch(
-                  addToWishlist({
-                    id: data.id,
-                    name: data.attributes.name,
-                    subDescription: data.attributes.subDescription,
-                    image: data.attributes.image.data[0].attributes.url,
-                    price: discountPrice,
-                  })
-                )
+              onClick={handleToWishlist
               }
             >
               <AiOutlineHeart size={24} /> Add To Wishlist
