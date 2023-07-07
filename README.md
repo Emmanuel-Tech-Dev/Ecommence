@@ -14,7 +14,7 @@ This is an e-commerce website built using React, Tailwind CSS, and Strapi as a C
 - payment
 - Responsive and visually appealing UI design using Tailwind CSS.
 
-## Features not Implemented
+## Features Under Development
 
 - User registration and authentication functionality.
 - filter by size , color , price, discount , availability 
