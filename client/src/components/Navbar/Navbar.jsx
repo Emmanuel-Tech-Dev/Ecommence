@@ -61,7 +61,7 @@ const Navbar = () => {
     setSearch(e.target.value);
   };
 
-  console.log(search);
+
 
 
   const { data, loading, error } = useFetch(`/categories?field=title`);
@@ -117,18 +117,28 @@ const Navbar = () => {
                 autoComplete="off"
                 onFocus={handleOpen}
                 onBlur={handleBlur}
+               
               />
             </div>
           </form>
 
           <div className={navStyle.icons}>
             <div className={navStyle.cart}>
-              <AiOutlineHeart
-                size={24}
-                color="#13101E"
-                onClick={handleWishOpen}
-                className="cursor-pointer"
-              />
+              {!openWishList ? (
+                <AiOutlineHeart
+                  size={24}
+                  color="#13101E"
+                  onClick={handleWishOpen}
+                  className="cursor-pointer"
+                />
+              ) : (
+                <AiFillHeart
+                  size={24}
+                  color="#13101E"
+                  onClick={handleWishOpen}
+                  className="cursor-pointer"
+                />
+              )}
               <span className={navStyle.count}>{wish.length}</span>
             </div>
 
@@ -138,12 +148,21 @@ const Navbar = () => {
               className="cursor-pointer"
             />
             <div className={navStyle.cart}>
-              <AiOutlineShopping
-                size={24}
-                color="#13101E"
-                className="cursor-pointer"
-                onClick={handleCartOpen}
-              />
+              {!open ? (
+                <AiOutlineShopping
+                  size={24}
+                  color="#13101E"
+                  className="cursor-pointer"
+                  onClick={handleCartOpen}
+                />
+              ) : (
+                <AiFillShopping
+                  size={24}
+                  color="#13101E"
+                  className="cursor-pointer"
+                  onClick={handleCartOpen}
+                />
+              )}
               <span className={navStyle.count}>{products.length}</span>
             </div>
           </div>
@@ -207,7 +226,7 @@ const Navbar = () => {
                 onChange={handleChange}
                 autoComplete="off"
                 onFocus={handleOpen}
-                onBlur={handleBlur}
+               
               />
             </div>
           </form>
@@ -267,7 +286,7 @@ const Navbar = () => {
         />
       )}
 
-      {openSearch && <Search search={search} setSearch={setSearch} />}
+      {openSearch && <Search search={search} setSearch={setSearch} setOpenSearch={setOpenSearch} />}
     </>
   );
 };

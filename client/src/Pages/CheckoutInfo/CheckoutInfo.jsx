@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IoIosArrowForward } from 'react-icons/io';
 
@@ -6,22 +6,51 @@ import AccDIon from '../../components/Accordion/AccDIon';
 import AccDionTwo from '../../components/Accordion/AccDionTwo';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeItem } from '../../redux/cartReducer';
+import axios from 'axios';
 
 const CheckoutInfo = () => {
+  const products = useSelector((state) => state.cart.products);
 
- const products = useSelector(state => state.cart.products)
+  console.log(products[0].name);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
- const totalPrice = () => {
-   let total = 0;
-   const taxPercentage = Math.random() * 0.1 + 0.1;
-   const taxAmount = total * taxPercentage.toFixed(2);
-   products.forEach((item) => (total += item.quantity * item.price));
-   const totalPrice = total + taxAmount;
-   return totalPrice.toFixed(2);
- };
+  const totalPrice = () => {
+    let total = 0;
+    const taxPercentage = Math.random() * 0.1 + 0.1;
+    const taxAmount = total * taxPercentage.toFixed(2);
+    products.forEach((item) => (total += item.quantity * item.price));
+    const totalPrice = total + taxAmount;
+    return totalPrice.toFixed(2);
+  };
 
+  const handlePlaceOrder = async () => {
+    try {
+      const orderData = {
+        data: [],
+      };
+
+      for (let i = 0; i < products.length; i++) {
+        orderData.data.push({
+          name: products[i].name,
+          quantity: products[i].quantity,
+          price: products[i].price * products[i].quantity,
+        });
+      }
+
+      const res = await axios.post(
+        'http://localhost:1338/api/orders',
+        orderData
+      );
+      console.log(res.data); // Handle the response as per your requirement
+      // Reset the cart or perform any other necessary actions
+      dispatch(removeItem());
+    } catch (error) {
+      console.error(error.message);
+      // Handle the error as per your requirement
+    }
+  };
+  // console.log(postData)
 
   return (
     <div className="px-2 md:px-8 pb-10">
@@ -42,26 +71,27 @@ const CheckoutInfo = () => {
 
       <div className="content flex flex-col  items-start gap-x-16 md:flex-row">
         <div className="left w-full flex-[1] md:flex-[3] ">
-         <form className='w-[100%] md:w-[70%]'>
-          <AccDIon />
-         
-          <AccDionTwo />
- <div className="button flex justify-between mt-24 text-white gap-x-5">
-            <Link className="" to={'/mycart/'}>
-              <div className=" text-[#1B4B66] underline font-semibold">
-                Back
-              </div>
-            </Link>
+          <form className="w-[100%] md:w-[70%]">
+            <AccDIon />
 
-            <Link className="" to={`/checkout/information`}>
-              <button className="bg-[#1B4B66] px-10 rounded-md py-2">
-                Place Order
-              </button>
-            </Link>
-          </div>
-         </form>
-          
-         
+            <AccDionTwo />
+            <div className="button flex justify-between mt-24 text-white gap-x-5">
+              <Link className="" to={'/mycart/'}>
+                <div className=" text-[#1B4B66] underline font-semibold">
+                  Back
+                </div>
+              </Link>
+
+              <Link className="" to={`/checkout/information`}>
+                <button
+                  className="bg-[#1B4B66] px-10 rounded-md py-2"
+                  onClick={handlePlaceOrder}
+                >
+                  Place Order
+                </button>
+              </Link>
+            </div>
+          </form>
         </div>
         <div className="right flex-[1] w-full mt-24 md:mt-0">
           <div className="right flex-[1] md:sticky md:top-5 md:h-full">
@@ -71,7 +101,6 @@ const CheckoutInfo = () => {
             <hr />
 
             <div className="my-10 flex flex-col justify-between w-[100%]">
-             
               {products.map((item) => (
                 <div key={item.id} className="left flex gap-x-5 my-3">
                   <img
@@ -107,7 +136,7 @@ const CheckoutInfo = () => {
                 <h1 className="mb-1 text-[24px] font-semibold text-[#1B4B66]">
                   Order Details
                 </h1>
-                <hr  />
+                <hr />
                 <div className="subtotal mt-5 flex justify-between items-center">
                   <h1>Subtotal:</h1>
                   <span>${totalPrice()}</span>
@@ -127,6 +156,6 @@ const CheckoutInfo = () => {
       </div>
     </div>
   );
-}
+};
 
-export default CheckoutInfo
+export default CheckoutInfo;

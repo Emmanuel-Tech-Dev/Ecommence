@@ -4,7 +4,8 @@
   "info": {
     "singularName": "order",
     "pluralName": "orders",
-    "displayName": "order"
+    "displayName": "order",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -14,14 +15,21 @@
     "name": {
       "type": "string"
     },
-    "price": {
-      "type": "decimal"
-    },
     "quantity": {
       "type": "biginteger"
     },
-    "productId": {
-      "type": "biginteger"
+    "price": {
+      "type": "decimal"
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
     }
   }
 }

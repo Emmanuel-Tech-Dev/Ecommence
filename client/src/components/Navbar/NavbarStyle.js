@@ -37,7 +37,7 @@ const NavStyle =
 
   rightM: `flex flex-col gap-5 mt-5  `,
 
-  inputFieldM: `bg-none px-2  w-[100%] rounded flex items-center   bg-[#F1F1F1]`,
+  inputFieldM: ` px-2  w-[100%] rounded flex items-center   bg-[#F1F1F1]`,
 
   inputM: `bg-transparent indent-2 w-full py-3 focus:outline-none placeholder:text-[14px]`,
 

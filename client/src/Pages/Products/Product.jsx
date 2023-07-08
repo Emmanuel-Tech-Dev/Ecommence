@@ -69,10 +69,11 @@ const Product = () => {
   const oldPrice = data?.attributes?.price;
   const discount = data?.attributes?.discount;
   const discountPrice = Math.round(oldPrice * (discount / 100));
+
+  // fetching data for the taps 
   const { newData } = useFetch(`/products?_limit=4&populate=*`);
 
-  console.log(data)
-
+  // filter the data to the four(4) latest  published data
   const filterProducts = newData
     .slice()
     .reverse()
@@ -82,7 +83,8 @@ const Product = () => {
         new Date(b.attributes.updatedAt) - new Date(a.attributes.updatedAt)
     );
 
-  const dispatch = useDispatch();
+  
+    const dispatch = useDispatch();
 
   const handleAddToCart = () => {
    dispatch(

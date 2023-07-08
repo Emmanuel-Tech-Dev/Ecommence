@@ -1,7 +1,7 @@
 
 const cardStyle = {
   card: `w-[200px] md:w-[286px] rounded-[50px]  mx-auto`,
-  img: `rounded-[16px] max-w-[100%] h-[290px] object-contain`,
+  img: `rounded-[16px] max-w-[100%] h-full object-contain`,
   desc: ` py-2 mt-2 md:py-2`,
   title: `flex items-center justify-between pb-3`,
   ratings: `flex justify-between pb-2`,
