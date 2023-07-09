@@ -10,12 +10,10 @@ This is an e-commerce website built using React, Tailwind CSS, and Strapi as a C
 - Toaster notification
 - Cart page
 - Checkout page
-- order list
-- payment
+- Payment Page
 - Responsive and visually appealing UI design using Tailwind CSS.
 
 ## Features Under Development
-
 - User registration and authentication functionality.
 - filter by size , color , price, discount , availability 
 - Ratings from user 
