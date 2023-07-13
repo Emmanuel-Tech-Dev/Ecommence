@@ -2,15 +2,29 @@ import Accordion from '../../components/Accordion/Accordion';
 
 import { IoIosArrowForward } from 'react-icons/io';
 import catStyle from './CategoriesStyle';
-
+import accordStyle from '../../components/Accordion/AccordStyle';
 import List from '../../components/List/LIst';
 import { Link, useParams } from 'react-router-dom';
 import useFetch from '../../hooks/usefetch';
+import { useState } from 'react';
+
 
 const Categories = () => {
   const cateId = parseInt(useParams().id);
 
   const { data } = useFetch(`/categories/${cateId}?populate=*`);
+
+  const [openFilter , setOpenFilter] = useState(false)
+
+  const handleClick = () => {
+    setOpenFilter(!openFilter)
+  }
+
+   const [isOpen, setIsOpen] = useState(false);
+  
+//   const toggleAccordion = () => {
+//     setIsOpen(!isOpen);
+// }
 
   return (
     <div className={catStyle.container}>
@@ -40,16 +54,26 @@ const Categories = () => {
         </div>
       </div>
       <div className={catStyle.bottom}>
-        <div className={catStyle.left}>
-          <Accordion title="Size" label="size" id="1" />
-          <Accordion title="Color" label="color" id="2" />
+        <div
+          className={
+            !openFilter
+              ? catStyle.left
+              : 'flex-[3] sticky top-5 h-[100%] md:flex-[1]'
+          }
+        >
+          
+           <Accordion title="Color" label="color" id="2" />
           <Accordion title="Brand" label="Brand" id="3" />
           <Accordion title="Price Range" label="price" id="4" />
           <Accordion title="Discount" label="discount" id="5" />
-          <Accordion title="Availability" label="available" id="6" />
+          <Accordion title="Availability" label="available" id="6" /> 
         </div>
         <div className={catStyle.right}>
-           <List cateId={cateId} />
+          <List
+            cateId={cateId}
+            openFilter={openFilter}
+            handleClick={handleClick}
+          />
         </div>
       </div>
     </div>

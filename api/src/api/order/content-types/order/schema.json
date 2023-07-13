@@ -12,24 +12,11 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
-      "type": "string"
+    "stripeId": {
+      "type": "text"
     },
-    "quantity": {
-      "type": "biginteger"
-    },
-    "price": {
-      "type": "decimal"
-    },
-    "image": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
-      "type": "media",
-      "multiple": true
+    "products": {
+      "type": "json"
     }
   }
 }

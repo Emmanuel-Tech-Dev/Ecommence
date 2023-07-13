@@ -1,12 +1,11 @@
 import { IoIosArrowForward } from 'react-icons/io';
 import { Link } from 'react-router-dom';
-
+import { makeRequest } from '../../../makeRequest';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeItem } from '../../redux/cartReducer';
-
+import { loadStripe } from '@stripe/stripe-js';
 
 const MyCart = () => {
-  
   const products = useSelector((state) => state.cart.products);
 
   const dispatch = useDispatch();
@@ -18,6 +17,26 @@ const MyCart = () => {
     products.forEach((item) => (total += item.quantity * item.price));
     const totalPrice = total + taxAmount;
     return totalPrice.toFixed(2);
+  };
+
+  const stripePromise = loadStripe(
+    'pk_test_51NHZAhGNm5QqJugrwq5NU368aPqix9u0yGGE619AV6djUxyP61EoRdRiUaYPDt9Y2sE2eAsGTtDATojIubXHvcJg004TODzUM9'
+  );
+
+  const handlePayment = async () => {
+    try {
+      const stripe = await stripePromise;
+      const res = await makeRequest.post('/orders', {
+        products,
+      });
+      await stripe.redirectToCheckout({
+        sessionId: res.data.stripeSession.id,
+      });
+
+      console.log(products);
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   return (
@@ -42,9 +61,9 @@ const MyCart = () => {
             <thead className="border-b">
               <tr>
                 <th>Product Name</th>
-                <th >Price</th>
-                <th >Qty</th>
-                <th >Subtotal</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Subtotal</th>
                 <hr />
               </tr>
             </thead>
@@ -89,9 +108,11 @@ const MyCart = () => {
                         </div>
                       </div>
                     </td>
-                    <td className='text-center'> ${item.price}</td>
-                    <td className='text-center'>{item.quantity}</td>
-                    <td className='text-center'>${item.quantity * item.price} </td>
+                    <td className="text-center"> ${item.price}</td>
+                    <td className="text-center">{item.quantity}</td>
+                    <td className="text-center">
+                      ${item.quantity * item.price}{' '}
+                    </td>
                   </tr>
                 </tbody>
               ))
@@ -134,11 +155,14 @@ const MyCart = () => {
             </div>
           </div>
           <div className="button flex flex-col justify-between text-white gap-5 md:gap-x-5 md:flex-row">
-            <Link className="md:w-[40%]" to={`/checkout/information`}>
-              <button className="bg-[#1B4B66] w-[100%] rounded-md py-2">
-                Place Order
-              </button>
-            </Link>
+            {/* <Link className="md:w-[40%]" to={`/checkout/information`}> */}
+            <button
+              className="bg-[#1B4B66] w-[100%] rounded-md py-2"
+              onClick={handlePayment}
+            >
+              Place Order
+            </button>
+            {/* </Link> */}
 
             <Link className="md:w-[40%]" to={'/categories/1'}>
               <button className="border-2 border-[#1B4B66] text-[#1B4B66] w-[100%] py-2 rounded-md">

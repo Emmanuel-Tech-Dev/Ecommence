@@ -2,7 +2,7 @@ import  { useState } from 'react';
 import accordStyle from '../../components/Accordion/AccordStyle';
 import { BiMinus, BiPlus } from 'react-icons/bi';
 
-const AccDIon = () => {
+const AccDIon = ({handleFormChange ,formData}) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
@@ -28,7 +28,7 @@ const AccDIon = () => {
             className={`px-4 py-2 max-h-full opacity-100 transition-all duration-300 overflow-hidden`}
           >
             <div className="flex items-center space-x-2 rounded p-2">
-              <form className='w-full'>
+              <div className="w-full">
                 <div className="top flex flex-col items-center md:gap-x-16 mt-4 md:flex-row">
                   <div className="name w-full ">
                     <label htmlFor="name">Full Name</label>
@@ -36,23 +36,28 @@ const AccDIon = () => {
                       <input
                         id="name"
                         type="text"
+                        name="fullname"
                         placeholder="Enter Name"
+                        onChange={handleFormChange}
                         className="focus:outline-none bg-transparent w-full"
+                        required
                       />
                     </div>
                   </div>
                   <div className="tel w-full mt-5 md:mt-0">
                     <label htmlFor="tel">Mobile Number</label>
-                  
-                      <div className="input bg-gray-100 px-3 py-2 rounded mt-1">
-                        <input
-                          id="tel"
-                          type="tel"
-                          placeholder="+233xxxxxxxxx"
-                          className="focus:outline-none bg-transparent w-full "
-                        />
-                      </div>
-                   
+
+                    <div className="input bg-gray-100 px-3 py-2 rounded mt-1">
+                      <input
+                        id="tel"
+                        type="tel"
+                        name="phoneNumber"
+                        onChange={handleFormChange}
+                        placeholder="+233xxxxxxxxx"
+                        className="focus:outline-none bg-transparent w-full "
+                        required
+                      />
+                    </div>
                   </div>
                 </div>
                 <div className="top flex flex-col items-center gap-x-16 my-8 md:flex-row">
@@ -62,6 +67,8 @@ const AccDIon = () => {
                       <input
                         id="street"
                         type="text"
+                        name="streetAddress"
+                        onClick={handleFormChange}
                         placeholder="Enter Address"
                         className="focus:outline-none bg-transparent w-full"
                       />
@@ -73,6 +80,8 @@ const AccDIon = () => {
                       <input
                         id="state"
                         type="text"
+                        name="state"
+                        onClick={handleFormChange}
                         placeholder="Enter State"
                         className="focus:outline-none bg-transparent w-full"
                       />
@@ -80,13 +89,15 @@ const AccDIon = () => {
                   </div>
                 </div>
 
-                <div className="top flex flex-col items-center gap-x-16 md-flex-row ">
+                <div className="top flex flex-col items-center gap-x-16 md:flex-row ">
                   <div className="city w-full ">
                     <label htmlFor="city">City/Province</label>
                     <div className="input bg-gray-100 px-3 py-2 rounded mt-1">
                       <input
                         id="city"
                         type="text"
+                        name="city"
+                        onClick={handleFormChange}
                         placeholder="Enter City/Province"
                         className="focus:outline-none bg-transparent w-full"
                       />
@@ -98,13 +109,15 @@ const AccDIon = () => {
                       <input
                         id="pin"
                         type="text"
+                        name="zipCode"
+                        onClick={handleFormChange}
                         placeholder="Enter Pin Code"
                         className="focus:outline-none bg-transparent w-full"
                       />
                     </div>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         ) : null}

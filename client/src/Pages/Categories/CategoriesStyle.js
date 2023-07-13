@@ -41,6 +41,7 @@ const catStyle = {
         md:gap-x-56 
         items-center  
         flex-wrap
+        
          justify-center
          
     `,

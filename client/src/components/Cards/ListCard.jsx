@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { addToWishlist, removeItem } from '../../redux/wishlistReducer';
 import { toast } from 'react-toastify';
 
-const ListCard = ({ item }) => {
+const ListCard = ({ item , openFilter }) => {
   // eslint-disable-next-line react/prop-types
   const oldPrice = item?.attributes?.price;
   const discount = item?.attributes?.discount;

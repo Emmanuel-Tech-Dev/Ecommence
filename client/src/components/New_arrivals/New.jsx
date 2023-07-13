@@ -69,7 +69,7 @@ const New = () => {
         </Link>
       </div>
 
-      <div className="px-2 md:px-8">
+      <div className="px-2 my-6 md:px-8">
         {loading ? (
           'Loading Data...'
         ) : error ? (

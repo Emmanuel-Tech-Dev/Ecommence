@@ -5,14 +5,15 @@ import { IoIosArrowForward } from 'react-icons/io';
 import AccDIon from '../../components/Accordion/AccDIon';
 import AccDionTwo from '../../components/Accordion/AccDionTwo';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeItem } from '../../redux/cartReducer';
+import { reset , removeItem } from '../../redux/cartReducer';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
+import { toast } from 'react-toastify';
+
 
 const CheckoutInfo = () => {
+
   const products = useSelector((state) => state.cart.products);
-
-  console.log(products[0].name);
-
   const dispatch = useDispatch();
 
   const totalPrice = () => {
@@ -24,32 +25,111 @@ const CheckoutInfo = () => {
     return totalPrice.toFixed(2);
   };
 
+  const generateShortUUID = () => {
+  const uuid = uuidv4();
+  const shortUUID = uuid.replace(/-/g, '').substring(0, 7);
+  return shortUUID;
+};
+const shortUUID = generateShortUUID();
+
+// handling form data 
+
+const [formData , setFormData] =useState({
+  fullname:'',
+  phoneNumber: '',
+  streetAddress : '' , 
+  state : '' , 
+  city: '',
+  zipcode:''
+
+})
+
+const handleFormChange = (e) => {
+  const {name , value} = e.target
+  setFormData((prevData) => {
+   return {
+    ...prevData , 
+    [name] : value
+   } 
+  })
+}
+
+console.log(formData)
+
+
+
   const handlePlaceOrder = async () => {
-    try {
-      const orderData = {
-        data: [],
-      };
+  if(products.length > 0) {
+ try {
+      await axios.post(
+      'http://localhost:1338/api/orders',
+      {
+        data : {
+          totalItems : products.length , 
+          totalAmount : totalPrice()  , 
+          orderID :  shortUUID  ,
+          customerName : formData.fullname , 
+          customerNumber : formData.phoneNumber , 
 
-      for (let i = 0; i < products.length; i++) {
-        orderData.data.push({
-          name: products[i].name,
-          quantity: products[i].quantity,
-          price: products[i].price * products[i].quantity,
-        });
+        }
       }
-
-      const res = await axios.post(
-        'http://localhost:1338/api/orders',
-        orderData
-      );
-      console.log(res.data); // Handle the response as per your requirement
-      // Reset the cart or perform any other necessary actions
-      dispatch(removeItem());
-    } catch (error) {
-      console.error(error.message);
-      // Handle the error as per your requirement
+    );
+    
+    if(products.length > 1) {
+toast.success(
+  `Order of ${products.length} items has been placed successfully. Wait for Delivery`,
+  {
+    position: 'top-center',
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light',
+  }
+);
+    } else{
+      toast.success(`Order of ${products.length} item has been placed successfully. Wait for Delivery`, {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
     }
+
+      
+    // Reset the cart or perform any other necessary actions
+    dispatch(reset());
+  } catch (error) {
+    console.error(error.message);
+    // Handle the error as per your requirement
+  }
+  }else {
+   toast.error(
+     `Order placement failed . No items in cart`,
+     {
+       position: 'top-center',
+       autoClose: 2000,
+       hideProgressBar: false,
+       closeOnClick: true,
+       pauseOnHover: true,
+       draggable: true,
+       progress: undefined,
+       theme: 'light',
+     }
+   );
+  }
+ 
   };
+
+ 
+
+
   // console.log(postData)
 
   return (
@@ -72,12 +152,12 @@ const CheckoutInfo = () => {
       <div className="content flex flex-col  items-start gap-x-16 md:flex-row">
         <div className="left w-full flex-[1] md:flex-[3] ">
           <form className="w-[100%] md:w-[70%]">
-            <AccDIon />
+            <AccDIon handleFormChange={handleFormChange} formData={formData} />
 
-            <AccDionTwo />
-            <div className="button flex justify-between mt-24 text-white gap-x-5">
+            <AccDionTwo handleFormChange={handleFormChange} />
+            <div className="button flex flex-col-reverse items-center justify-between mt-24 text-white gap-5 md:flex-row">
               <Link className="" to={'/mycart/'}>
-                <div className=" text-[#1B4B66] underline font-semibold">
+                <div className=" text-[#1B4B66] underline w-full font-semibold">
                   Back
                 </div>
               </Link>
@@ -154,6 +234,7 @@ const CheckoutInfo = () => {
           </div>
         </div>
       </div>
+    
     </div>
   );
 };
