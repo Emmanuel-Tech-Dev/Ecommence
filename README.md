@@ -12,12 +12,12 @@ This is an e-commerce website built using React, Tailwind CSS, and Strapi as a C
 - Checkout page
 - Payment Page
 - Responsive and visually appealing UI design using Tailwind CSS.
+- Integration with a secure payment gateway Stripe.
 
 ## Features Under Development
 - User registration and authentication functionality.
 - filter by size , color , price, discount , availability 
 - Ratings from user 
-- Integration with a secure payment gateway (Stripe or Paystack).
 - Order tracking and history for customers.
 
 
