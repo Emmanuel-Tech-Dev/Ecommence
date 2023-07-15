@@ -125,7 +125,7 @@ console.log(!open)
             Check
           </button>
         </div>
-        <Link to={'/checkout/information'}>
+        <Link to={'/mycart'}>
           <button
             className="w-full text-center mt-4  py-2 bg-[#1B4B66] text-[#fff] rounded-md"
             onClick={handleCartTimeOut}

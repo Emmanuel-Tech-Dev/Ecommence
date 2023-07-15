@@ -33,11 +33,14 @@ const MyCart = () => {
         sessionId: res.data.stripeSession.id,
       });
 
-      console.log(products);
+        console.log(stripe)
+        console.log(res)
+      
     } catch (err) {
       console.log(err.message);
     }
   };
+
 
   return (
     <div className="px-2 md:px-8 pb-10">
@@ -56,8 +59,8 @@ const MyCart = () => {
         </div>
       </div>
       <div className="content flex flex-col  items-start gap-16 md:flex-row">
-        <div className="left w-full flex-[1]">
-          <table className=" text-left ">
+        <div className="left w-full flex-[1] md:flex-[1] ">
+          <table className=" text-left md:w-[80%]">
             <thead className="border-b">
               <tr>
                 <th>Product Name</th>
